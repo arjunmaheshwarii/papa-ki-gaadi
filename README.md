@@ -1,6 +1,6 @@
 # Papa Ki Gaadi
 
-Old songs for a long drive. 112 Hindi classics on eight cassettes in an old car stereo. Turn the key and it plays on its own.
+Old songs for a long drive. 168 Hindi classics on twelve cassettes in an old car stereo. Turn the key and it plays on its own.
 
 ## What's in this folder
 
