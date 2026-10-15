@@ -54,7 +54,12 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
 .top{margin-bottom:18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
 .top h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.05;color:var(--paper);letter-spacing:.01em;text-wrap:balance}
 .top h1 small{display:block;font-family:var(--f-body);font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:8px}
-.chai{appearance:none;cursor:pointer;font:inherit;font-size:.85rem;font-weight:600;line-height:1;color:var(--paper);background:transparent;border:1px solid #5a4a3a;border-radius:999px;padding:9px 15px 9px 12px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;margin-top:6px;transition:border-color .2s,color .2s}
+.top-r{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;margin-top:6px}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--paper);white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.live b{font-weight:700;font-variant-numeric:tabular-nums}
+.live i{width:8px;height:8px;border-radius:50%;background:#5fd38a;box-shadow:0 0 0 0 rgba(95,211,138,.6);animation:livepulse 2s ease-out infinite}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(95,211,138,.55)}70%{box-shadow:0 0 0 8px rgba(95,211,138,0)}100%{box-shadow:0 0 0 0 rgba(95,211,138,0)}}
+.chai{appearance:none;cursor:pointer;font:inherit;font-size:.85rem;font-weight:600;line-height:1;color:var(--paper);background:transparent;border:1px solid #5a4a3a;border-radius:999px;padding:9px 15px 9px 12px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;transition:border-color .2s,color .2s}
 .chai svg{width:17px;height:17px;flex:none}
 .chai:hover{border-color:var(--amber);color:var(--amber)}
 .chai:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
@@ -260,7 +265,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
   .vent.r{left:calc(100% - (100% - 1120px) / 4)}
 }
 @media (prefers-reduced-motion:reduce){
-  .charm,.pencil.on,.cassette.flipping,.ign-dial{animation:none}
+  .charm,.pencil.on,.cassette.flipping,.ign-dial,.live i{animation:none}
   .marquee span{animation:none;padding-left:0}
 }
 </style>
@@ -272,7 +277,10 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
   <div class="cockpit">
   <header class="top">
     <h1>Papa Ki Gaadi<small>Old songs for a long drive</small></h1>
+    <div class="top-r">
+    <span class="live" id="live" hidden><i aria-hidden="true"></i><b id="liveN">0</b> listening now</span>
     <button class="chai" id="chaiBtn" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 3.5c-.8 1 .8 1.8 0 3M12 3.5c-.8 1 .8 1.8 0 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Buy me a chai</button>
+    </div>
   </header>
 
   <section class="windshield" aria-label="Night drive">
@@ -680,6 +688,7 @@ function render(){
   $('playIc').textContent = S.playing ? '❚❚' : '▶︎';
   $('playTx').textContent = S.playing ? 'Pause' : 'Play';
   $('car').classList.toggle('is-playing', S.playing);
+  Live.nudge();
   const ign = $('ignition');
   ign.hidden = S.playing || S.wantPlay;
   $('ignTx').textContent = S.started ? 'Paused' : 'Turn the key';
@@ -842,6 +851,38 @@ document.addEventListener('keydown', e => {
   if ($('tip').open) return;
   if (e.code === 'Space' && !e.target.closest('button,[role=slider],a,input,textarea')){ e.preventDefault(); toggle(); }
 });
+
+/* ---------- Live listeners ---------- */
+// Pings /api/live (a Vercel function) every 30s. Shows "N listening now" = people with music playing in the last 90s.
+// Hidden when the counter backend isn't set up (or in previews).
+const Live = (() => {
+  const raw = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now();
+  const id = raw.replace(/[^\w-]/g, '').slice(0, 36);
+  const el = $('live'), num = $('liveN');
+  let timer = 0, off = location.protocol === 'file:', last = null;
+  async function ping(){
+    if (off) return;
+    try {
+      const r = await fetch(`/api/live?id=${id}&playing=${S.playing ? 1 : 0}`, { cache:'no-store' });
+      if (!r.ok) { if (r.status === 404) off = true; el.hidden = true; return; }
+      const j = await r.json();
+      if (typeof j.count !== 'number') { off = true; el.hidden = true; return; }
+      const c = Math.max(j.count, S.playing ? 1 : 0);
+      num.textContent = c.toLocaleString('en-IN');
+      el.hidden = c < 1;
+    } catch(e){ el.hidden = true; }
+  }
+  return {
+    start(){
+      ping();
+      clearInterval(timer);
+      timer = setInterval(() => { if (!document.hidden) ping(); }, 30000);
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) ping(); });
+      addEventListener('pagehide', () => { if (!off) try { navigator.sendBeacon(`/api/live?id=${id}&playing=0`); } catch(e){} });
+    },
+    nudge(){ if (last !== S.playing){ last = S.playing; ping(); } }
+  };
+})();
 
 /* ---------- Buy me a chai ---------- */
 function setupChai(){
@@ -1120,6 +1161,7 @@ buildTicks();
 setVol(S.vol);
 render();
 loadYT();
+Live.start();
 requestAnimationFrame(frame);
 })();
 </script>
