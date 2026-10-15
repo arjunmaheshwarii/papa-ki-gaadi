@@ -10,7 +10,7 @@
 <meta property="og:url" content="https://papa-ki-gaadi.vercel.app/">
 <!-- If you add a custom domain, update these links to it -->
 <meta property="og:title" content="Papa Ki Gaadi">
-<meta property="og:description" content="Old songs for a long drive. 89 Hindi classics on eight cassettes in an old car stereo. Turn the key and drive.">
+<meta property="og:description" content="Old songs for a long drive. 112 Hindi classics on eight cassettes in an old car stereo. Turn the key and drive.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://papa-ki-gaadi.vercel.app/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://papa-ki-gaadi.vercel.app/og.jpg">
 <title>Papa Ki Gaadi</title>
-<meta name="description" content="Old songs for a long drive. 89 Hindi classics on eight cassettes in an old car stereo. Turn the key and drive.">
+<meta name="description" content="Old songs for a long drive. 112 Hindi classics on eight cassettes in an old car stereo. Turn the key and drive.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@400;600;700&family=Kalam:wght@400;700&family=VT323&display=swap">
@@ -322,7 +322,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
       <p class="now-note" id="demoNote">Loading the tape…</p>
     </div>
     <div class="box">
-      <p class="eyebrow">The glovebox · 8 tapes · 89 songs</p>
+      <p class="eyebrow">The glovebox · 8 tapes · 112 songs</p>
       <div class="tapes" id="tapes" aria-label="Tapes"></div>
       <details class="cover" id="cover">
         <summary><b id="coverName">Kishore, on the Road</b><span><span class="open-tx"><span id="coverCount">12 songs</span> · see the tracklist</span><span class="close-tx">Close</span></span></summary>
@@ -380,7 +380,9 @@ const TAPES = [
     { t:"Chookar Mere Man Ko", a:"Kishore Kumar", f:"Yaarana", y:1981, id:'BOLYNw3x1lE' },
     { t:"Ek Ladki Bheegi Bhaagi Si", a:"Kishore Kumar", f:"Chalti Ka Naam Gaadi", y:1958, id:'_nttJocQcr8' },
     { t:"Rimjhim Gire Sawan", a:"Kishore Kumar", f:"Manzil", y:1979, id:'JQoSSJDZxOo' },
-    { t:"Neele Neele Ambar Par", a:"Kishore Kumar", f:"Kalaakaar", y:1983, id:'uc3hF-rH4Qg' }
+    { t:"Neele Neele Ambar Par", a:"Kishore Kumar", f:"Kalaakaar", y:1983, id:'uc3hF-rH4Qg' },
+    { t:"Khaike Paan Banaraswala", a:"Kishore Kumar", f:"Don", y:1978, id:'C3tcvnEqN9I' },
+    { t:"Mere Naina Sawan Bhadon", a:"Kishore Kumar", f:"Mehbooba", y:1976, id:'_4Ccxj_A4UU' }
   ]},
   { name:"Rafi Sahab", short:"Rafi", color:'#2f5d8a', tracks:[
     { t:"Yahoo! Chahe Koi Mujhe Junglee Kahe", a:"Mohammed Rafi", f:"Junglee", y:1961, id:'JO3hE467U2s' },
@@ -394,7 +396,9 @@ const TAPES = [
     { t:"Pukarta Chala Hoon Main", a:"Mohammed Rafi", f:"Mere Sanam", y:1965, id:'gLKBwutnPwA' },
     { t:"Yeh Reshmi Zulfein", a:"Mohammed Rafi", f:"Do Raaste", y:1969, id:'trbrxYK_-EA' },
     { t:"Badan Pe Sitare", a:"Mohammed Rafi", f:"Prince", y:1969, id:'MkABeVCv4lw' },
-    { t:"Tere Mere Sapne Ab Ek Rang Hain", a:"Mohammed Rafi", f:"Guide", y:1965, id:'XqC6kjW3Bnk' }
+    { t:"Tere Mere Sapne Ab Ek Rang Hain", a:"Mohammed Rafi", f:"Guide", y:1965, id:'XqC6kjW3Bnk' },
+    { t:"Gulabi Aankhen", a:"Mohammed Rafi", f:"The Train", y:1970, id:'6fhT7mS0Qh4' },
+    { t:"Tum Jo Mil Gaye Ho", a:"Mohammed Rafi", f:"Hanste Zakhm", y:1973, id:'b2AYqMzY1sc' }
   ]},
   { name:"Lata & Asha", short:"Lata & Asha", color:'#c2862f', tracks:[
     { t:"Lag Ja Gale", a:"Lata Mangeshkar", f:"Woh Kaun Thi", y:1964, id:'ZtpjCx7bJgw' },
@@ -403,7 +407,14 @@ const TAPES = [
     { t:"Aaj Phir Jeene Ki Tamanna Hai", a:"Lata Mangeshkar", f:"Guide", y:1965, id:'OjCdvmLfdaw' },
     { t:"Dum Maro Dum", a:"Asha Bhosle", f:"Hare Rama Hare Krishna", y:1971, id:'8WrNOTOFr8E' },
     { t:"Piya Tu Ab To Aaja", a:"Asha Bhosle", f:"Caravan", y:1971, id:'mfPHWRyDNm4' },
-    { t:"In Aankhon Ki Masti", a:"Asha Bhosle", f:"Umrao Jaan", y:1981, id:'PCCmg1tmMQs' }
+    { t:"In Aankhon Ki Masti", a:"Asha Bhosle", f:"Umrao Jaan", y:1981, id:'PCCmg1tmMQs' },
+    { t:"Rangeela Re", a:"Lata Mangeshkar", f:"Prem Pujari", y:1970, id:'GmMPZUorefY' },
+    { t:"Chalte Chalte", a:"Lata Mangeshkar", f:"Pakeezah", y:1972, id:'Ja-VxIWr-b0' },
+    { t:"Aaiye Meherbaan", a:"Asha Bhosle", f:"Howrah Bridge", y:1958, id:'WYOLuPSt9VE' },
+    { t:"Raat Akeli Hai", a:"Asha Bhosle", f:"Jewel Thief", y:1967, id:'Su4vvd2thG8' },
+    { t:"Yeh Mera Dil", a:"Asha Bhosle", f:"Don", y:1978, id:'PBswob1fm_g' },
+    { t:"Mera Saaya Saath Hoga", a:"Lata Mangeshkar", f:"Mera Saaya", y:1966, id:'RYky7THXRzw' },
+    { t:"Dil Cheez Kya Hai", a:"Asha Bhosle", f:"Umrao Jaan", y:1981, id:'uEe94AhRwBI' }
   ]},
   { name:"Duets for Two", short:"Duets", color:'#3f7a52', tracks:[
     { t:"Tere Bina Zindagi Se", a:"Lata & Kishore", f:"Aandhi", y:1975, id:'i5CMRLzEfUc' },
@@ -416,7 +427,10 @@ const TAPES = [
     { t:"Tere Mere Milan Ki Yeh Raina", a:"Lata & Kishore", f:"Abhimaan", y:1973, id:'32jDXnHdU1g' },
     { t:"Hum Tum Ek Kamre Mein Band Ho", a:"Shailendra Singh & Lata", f:"Bobby", y:1973, id:'Lf01ajBUpu0' },
     { t:"Chura Liya Hai Tumne Jo Dil Ko", a:"Asha & Rafi", f:"Yaadon Ki Baaraat", y:1973, id:'seFeZOgyFsc' },
-    { t:"Dekha Ek Khwab", a:"Kishore & Lata", f:"Silsila", y:1981, id:'tQ9k7DcxKm0' }
+    { t:"Dekha Ek Khwab", a:"Kishore & Lata", f:"Silsila", y:1981, id:'tQ9k7DcxKm0' },
+    { t:"Ek Main Aur Ek Tu", a:"Kishore & Asha", f:"Khel Khel Mein", y:1975, id:'CZ5b1eGrNXU' },
+    { t:"Aap Ki Aankhon Mein Kuch", a:"Kishore & Lata", f:"Ghar", y:1978, id:'qn3WEdLtp-g' },
+    { t:"Achha To Hum Chalte Hain", a:"Kishore & Lata", f:"Aan Milo Sajna", y:1970, id:'5EzLaiNQpRk' }
   ]},
   { name:"Mukesh & Manna Dey", short:"Mukesh", color:'#6b4a8a', tracks:[
     { t:"Kahin Door Jab Din Dhal Jaye", a:"Mukesh", f:"Anand", y:1971, id:'w0AkZQUokog' },
@@ -430,7 +444,9 @@ const TAPES = [
     { t:"Ae Bhai Zara Dekh Ke Chalo", a:"Manna Dey", f:"Mera Naam Joker", y:1970, id:'caf-to4eKPg' },
     { t:"Main Pal Do Pal Ka Shayar Hoon", a:"Mukesh", f:"Kabhi Kabhie", y:1976, id:'QkGqpVYjLUw' },
     { t:"Dost Dost Na Raha", a:"Mukesh", f:"Sangam", y:1964, id:'H0xa-fvKmFM' },
-    { t:"Sajan Re Jhoot Mat Bolo", a:"Mukesh", f:"Teesri Kasam", y:1966, id:'M2IjwP6T6HQ' }
+    { t:"Sajan Re Jhoot Mat Bolo", a:"Mukesh", f:"Teesri Kasam", y:1966, id:'M2IjwP6T6HQ' },
+    { t:"Ek Din Bik Jayega", a:"Mukesh & Kishore", f:"Dharam Karam", y:1975, id:'f3tguxqlaOg' },
+    { t:"Laga Chunari Mein Daag", a:"Manna Dey", f:"Dil Hi To Hai", y:1963, id:'TFh1imhOQ7U' }
   ]},
   { name:"Ghazals for the Night", short:"Ghazals", color:'#25395c', tracks:[
     { t:"Hothon Se Chhu Lo Tum", a:"Jagjit Singh", f:"Prem Geet", y:1981, id:'31f0mVT2Mvc' },
@@ -444,7 +460,9 @@ const TAPES = [
     { t:"Aur Ahista Kijiye Baatein", a:"Pankaj Udhas", f:"", y:'', id:'lzbmsETV348' },
     { t:"Ranjish Hi Sahi", a:"Mehdi Hassan", f:"", y:'', id:'Xc6uwbXpmUY' },
     { t:"Woh Kagaz Ki Kashti", a:"Jagjit Singh", f:"", y:'', id:'CbDQ8yjDcx8' },
-    { t:"Koi Fariyaad", a:"Jagjit Singh", f:"Tum Bin", y:2001, id:'8MN2bxMiB9A' }
+    { t:"Koi Fariyaad", a:"Jagjit Singh", f:"Tum Bin", y:2001, id:'8MN2bxMiB9A' },
+    { t:"Kal Chaudhvin Ki Raat Thi", a:"Jagjit Singh", f:"", y:'', id:'JzaVoULkZNM' },
+    { t:"Hazaron Khwahishen Aisi", a:"Jagjit Singh", f:"Mirza Ghalib", y:1988, id:'4SxqoqVwgF8' }
   ]},
   { name:"The Eighties", short:"Eighties", color:'#c25a2c', tracks:[
     { t:"Ek Do Teen", a:"Alka Yagnik", f:"Tezaab", y:1988, id:'9aUmlOzlHTc' },
@@ -457,7 +475,10 @@ const TAPES = [
     { t:"Jab Hum Jawan Honge", a:"Lata & Shabbir Kumar", f:"Betaab", y:1983, id:'_GyjFGdWkaI' },
     { t:"Gazab Ka Hai Din", a:"Udit Narayan & Alka Yagnik", f:"Qayamat Se Qayamat Tak", y:1988, id:'B1xmmB1vwVs' },
     { t:"Dil Deewana", a:"Lata & S.P. Balasubrahmanyam", f:"Maine Pyar Kiya", y:1989, id:'5s68NXiaWgk' },
-    { t:"Tumse Milke", a:"Asha & Suresh Wadkar", f:"Parinda", y:1989, id:'hkqVdyFb2mg' }
+    { t:"Tumse Milke", a:"Asha & Suresh Wadkar", f:"Parinda", y:1989, id:'hkqVdyFb2mg' },
+    { t:"Yaad Aa Raha Hai", a:"Bappi Lahiri", f:"Disco Dancer", y:1982, id:'656Umzn7zT0' },
+    { t:"Tere Mere Beech Mein", a:"Lata & S.P. Balasubrahmanyam", f:"Ek Duuje Ke Liye", y:1981, id:'xTkuc-jDep4' },
+    { t:"Mere Haathon Mein", a:"Lata Mangeshkar", f:"Chandni", y:1989, id:'Oo-WHs3bw34' }
   ]},
   { name:"The Nineties", short:"Nineties", color:'#2b8a8a', tracks:[
     { t:"Pehla Nasha", a:"Udit Narayan & Sadhana Sargam", f:"Jo Jeeta Wohi Sikandar", y:1992, id:'TWrjjzb-E44' },
@@ -471,7 +492,9 @@ const TAPES = [
     { t:"Chaiyya Chaiyya", a:"Sukhwinder Singh & Sapna Awasthi", f:"Dil Se", y:1998, id:'T8_k-g1NQgA' },
     { t:"Jab Koi Baat Bigad Jaye", a:"Kumar Sanu & Sadhana Sargam", f:"Jurm", y:1990, id:'83V0ah7EfiE' },
     { t:"Bahut Pyar Karte Hain", a:"Anuradha Paudwal", f:"Saajan", y:1991, id:'ycj1FwxiZwc' },
-    { t:"Dil Hai Ki Manta Nahin", a:"Kumar Sanu & Anuradha Paudwal", f:"Dil Hai Ki Manta Nahin", y:1991, id:'NiVVvkUCWZo' }
+    { t:"Dil Hai Ki Manta Nahin", a:"Kumar Sanu & Anuradha Paudwal", f:"Dil Hai Ki Manta Nahin", y:1991, id:'NiVVvkUCWZo' },
+    { t:"Dekha Hai Pehli Baar", a:"Alka Yagnik & S.P. Balasubrahmanyam", f:"Saajan", y:1991, id:'bBjVLCAAM1A' },
+    { t:"Pardesi Pardesi", a:"Udit Narayan, Alka Yagnik & Sapna Awasthi", f:"Raja Hindustani", y:1996, id:'UHoKUGdYQLQ' }
   ]}
 ];
 
