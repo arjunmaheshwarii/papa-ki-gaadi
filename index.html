@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#120e0b">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="og.jpg">
+<!-- After you connect your domain, change og.jpg below to the full link, e.g. https://papakigaadi.in/og.jpg -->
+<meta property="og:title" content="Papa Ki Gaadi">
+<meta property="og:description" content="Old songs for a long drive. 89 Hindi classics on eight cassettes in an old car stereo. Turn the key and drive.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.jpg">
+<title>Papa Ki Gaadi</title>
+<meta name="description" content="Old songs for a long drive. 89 Hindi classics on eight cassettes in an old car stereo. Turn the key and drive.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@400;600;700&family=Kalam:wght@400;700&family=VT323&display=swap">
+<style>
+/* Layout: a night drive seen from the passenger seat. Windshield on top, dashboard with the cassette deck in the middle, glovebox (video + cassette cover) below. Deliberately one dark look: it is always night on this drive. */
+:root{
+  color-scheme: dark;
+  --night:#120e0b;
+  --vinyl:#261e18;
+  --vinyl-hi:#3b2f26;
+  --chrome:#d6cebf;
+  --chrome-lo:#6f675b;
+  --amber:#ffb340;
+  --paper:#efe3c6;
+  --ink:#24408e;
+  --maruti:#b8322a;
+  --fg:#f2e7d3;
+  --muted:#ab9a82;
+  --paper-ink:#2b1e12;
+  --paper-muted:#7a6650;
+  --f-display:"Rozha One","Mukta",Georgia,serif;
+  --f-body:"Mukta",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-hand:"Kalam","Segoe Print","Comic Sans MS",cursive;
+  --f-lcd:"VT323",ui-monospace,"Courier New",monospace;
+}
+*{box-sizing:border-box}
+html,body{background:var(--night)}
+body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.car{max-width:1060px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+
+/* header */
+.top{margin-bottom:18px}
+.top h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.05;color:var(--paper);letter-spacing:.01em;text-wrap:balance}
+.top h1 small{display:block;font-family:var(--f-body);font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+/* windshield */
+.windshield{position:relative;aspect-ratio:16/7;max-width:100%;background:#0a0c1a;clip-path:polygon(4% 0,96% 0,100% 100%,0 100%)}
+.windshield canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.windshield{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ignition{position:absolute;left:50%;top:54%;translate:-50% -50%;display:grid;justify-items:center;gap:8px;appearance:none;border:0;background:none;cursor:pointer;color:var(--fg);font:inherit;padding:10px 14px;text-align:center}
+.ign-dial{width:clamp(92px,15vw,128px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3eee4,#a79e90 45%,#4a443c);box-shadow:0 0 0 6px #1a1612,0 0 0 8px var(--chrome-lo),0 12px 24px rgba(0,0,0,.6);display:grid;place-items:center;animation:breathe 2.4s ease-in-out infinite}
+.ign-dial svg{width:62%;height:auto;transition:transform .3s cubic-bezier(.3,1.5,.5,1)}
+.ignition:hover .ign-dial svg,.ignition:focus-visible .ign-dial svg{transform:rotate(25deg)}
+.ign-tx{font-family:var(--f-display);font-size:clamp(1.35rem,3.2vw,1.85rem);line-height:1.1;color:var(--amber);text-shadow:0 2px 12px rgba(0,0,0,.9)}
+.ign-sub{font-size:.88rem;line-height:1.3;color:var(--fg);text-shadow:0 1px 8px rgba(0,0,0,.95);max-width:24ch}
+.ignition:focus-visible{outline:2px solid var(--amber);outline-offset:4px;border-radius:14px}
+.ignition::before{content:"";position:absolute;inset:-30px -40px;z-index:-1;background:radial-gradient(closest-side,rgba(6,6,12,.78),rgba(6,6,12,0));pointer-events:none}
+@keyframes breathe{50%{box-shadow:0 0 0 6px #1a1612,0 0 0 8px var(--chrome-lo),0 0 46px 6px rgba(255,179,64,.45),0 12px 24px rgba(0,0,0,.6)}}
+.mirror{position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.mirror .stem{width:10px;height:14px;background:#1a1714}
+.mirror .glass{width:clamp(104px,17vw,168px);height:clamp(28px,4.2vw,40px);border-radius:10px;background:linear-gradient(170deg,#3b3f52 0%,#14161f 55%,#262a38 100%);border:3px solid #0d0c0b;box-shadow:0 6px 14px rgba(0,0,0,.5)}
+.charm{width:30px;height:auto;margin-top:-2px;transform-origin:50% 0;animation:swing 3.2s ease-in-out infinite alternate}
+@keyframes swing{from{transform:rotate(calc(var(--sw,5deg) * -1))}to{transform:rotate(var(--sw,5deg))}}
+.car.is-playing .charm{--sw:10deg;animation-duration:1.5s}
+
+/* dashboard */
+.dash{position:relative;margin-top:-26px;background:linear-gradient(180deg,var(--vinyl-hi),var(--vinyl) 40%);border-radius:50% 50% 20px 20px / 26px 26px 20px 20px;padding:34px 22px 22px;display:grid;grid-template-columns:190px minmax(0,1fr) 140px;gap:22px;align-items:center;box-shadow:inset 0 2px 0 rgba(255,255,255,.06),0 20px 40px rgba(0,0,0,.4)}
+.gauges{display:grid;gap:10px;justify-items:center}
+.speedo{width:100%;max-width:190px;height:auto;display:block}
+.odo{font-family:var(--f-lcd);font-size:1.35rem;line-height:1.2;background:#0b0a09;border:1px solid #3a332b;border-radius:4px;padding:0 8px;color:#efe9de;letter-spacing:.06em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.odo .u{color:var(--muted);font-size:.95rem}
+.fuel{display:flex;align-items:center;gap:7px;font-size:.68rem;font-weight:600;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.fuel .bar{width:64px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--maruti) 0 12%,#3a332b 12%)}
+.stereo{background:linear-gradient(180deg,#24211d,#12100e);border:2px solid var(--chrome-lo);border-radius:12px;padding:10px 14px 14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);min-width:0}
+.brand{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--chrome-lo)}
+.brand b{font-family:var(--f-display);font-weight:400;letter-spacing:.03em;font-size:1rem;text-transform:none;color:var(--chrome)}
+
+.slot{background:#070605;border-radius:8px;padding:8px;box-shadow:inset 0 3px 10px rgba(0,0,0,.8);perspective:600px;min-width:0}
+.cassette{position:relative;aspect-ratio:1.6;max-width:100%;background:linear-gradient(160deg,#3d3935,#24211e);border-radius:7px}
+.cassette.flipping{animation:flip .7s ease-in-out}
+@keyframes flip{50%{transform:rotateY(90deg) scale(.95)}}
+.label{position:absolute;left:6%;right:6%;top:7%;height:64%;border-radius:4px;background:linear-gradient(transparent 0 27%,var(--tape,var(--maruti)) 27% 30%,transparent 30%),var(--paper)}
+.label-title{position:absolute;left:5%;right:17%;top:3%;font-family:var(--f-hand);font-weight:700;color:var(--ink);font-size:clamp(.78rem,2vw,1.02rem);line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.label-side{position:absolute;right:4%;top:4%;width:1.6em;height:1.6em;display:grid;place-items:center;border:1.5px solid var(--paper-ink);font-weight:700;color:var(--paper-ink);font-size:clamp(.66rem,1.6vw,.85rem);line-height:1;border-radius:2px}
+.label-note{position:absolute;left:5%;right:5%;bottom:3%;font-family:var(--f-hand);color:var(--ink);font-size:clamp(.58rem,1.4vw,.74rem);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.window{position:absolute;left:22%;right:22%;top:33%;height:27%;border-radius:999px;background:#191512;overflow:hidden;box-shadow:inset 0 0 0 2px #0c0a09}
+.window canvas{width:100%;height:100%;display:block}
+.cbottom{position:absolute;left:18%;right:18%;bottom:0;height:20%;background:#1b1916;clip-path:polygon(7% 0,93% 0,100% 100%,0 100%)}
+.cbottom::before,.cbottom::after{content:"";position:absolute;bottom:28%;width:7%;aspect-ratio:1;border-radius:50%;background:#050404}
+.cbottom::before{left:22%}
+.cbottom::after{right:22%}
+.pencil{position:absolute;left:36.6%;top:46.5%;width:clamp(9px,1.5vw,12px);height:auto;transform-origin:50% 100%;translate:-50% -100%;rotate:-28deg;opacity:0;pointer-events:none;transition:opacity .25s}
+.pencil.on{opacity:1;animation:crank .32s linear infinite}
+@keyframes crank{0%{transform:translate(3px,0)}25%{transform:translate(0,3px)}50%{transform:translate(-3px,0)}75%{transform:translate(0,-3px)}100%{transform:translate(3px,0)}}
+
+.deck{display:grid;gap:12px;align-content:start;min-width:0}
+.lcd{background:#170d02;border:1px solid #3d2b10;border-radius:6px;padding:6px 10px 8px;color:var(--amber);font-family:var(--f-lcd);text-shadow:0 0 6px rgba(255,179,64,.55);min-width:0}
+.lcd-row{display:flex;justify-content:space-between;gap:10px;font-size:1.25rem;line-height:1.15;font-variant-numeric:tabular-nums}
+.marquee{overflow:hidden;white-space:nowrap;font-size:1.6rem;line-height:1.25;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.marquee span{display:inline-block;padding-left:100%;animation:scroll var(--dur,16s) linear infinite}
+@keyframes scroll{to{transform:translateX(-100%)}}
+.keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.key{appearance:none;border:0;cursor:pointer;font:inherit;display:grid;justify-items:center;gap:3px;padding:9px 2px 7px;border-radius:4px 4px 9px 9px;background:linear-gradient(180deg,#eee7da,#b4ab9c);color:#1d1a16;box-shadow:0 5px 0 #5c564c,0 7px 10px rgba(0,0,0,.5);transition:transform .08s,box-shadow .08s;min-width:0}
+.key .ic{font-size:.95rem;line-height:1;height:1rem;display:grid;place-items:center}
+.key .ic svg{width:15px;height:15px}
+.key .tx{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1}
+.key:active,.key[aria-pressed="true"]{transform:translateY(4px);box-shadow:0 1px 0 #5c564c,0 2px 4px rgba(0,0,0,.5)}
+.key.play[aria-pressed="true"]{background:linear-gradient(180deg,#ffd38a,#e09a2c)}
+.key:focus-visible,.knob:focus-visible,.track:focus-visible,a:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+.knob-wrap{display:grid;justify-items:center;gap:8px}
+.knob-ring{position:relative;width:118px;height:118px;display:grid;place-items:center}
+.knob-ring svg{position:absolute;inset:0;width:100%;height:100%}
+.knob{width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#f1ece2 0,#a69d8f 45%,#4a443c 100%);box-shadow:0 8px 16px rgba(0,0,0,.55),inset 0 -3px 6px rgba(0,0,0,.35);transform:rotate(var(--a,0deg));cursor:grab;touch-action:none;position:relative}
+.knob::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:20px;margin-left:-2px;border-radius:2px;background:var(--maruti)}
+.knob-label{font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:baseline;gap:6px}
+.knob-label b{font-family:var(--f-lcd);font-size:1.3rem;font-weight:400;color:var(--amber);letter-spacing:0;font-variant-numeric:tabular-nums}
+
+/* glovebox */
+.glove{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:24px;margin-top:28px;align-items:start}
+.now{min-width:0}
+.now-t{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(1.5rem,3vw,2rem);line-height:1.15;color:var(--paper);text-wrap:balance}
+.now-m{margin:6px 0 0;color:var(--muted);font-size:.95rem;line-height:1.4}
+.now-note{margin:16px 0 0;padding:10px 12px;border:1px solid #3a2f26;border-radius:8px;color:var(--muted);font-size:.88rem;line-height:1.4;max-width:40ch}
+.yt-hidden{position:fixed;left:0;bottom:0;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+.yt-hidden iframe,.yt-hidden #yt{width:1px;height:1px;border:0}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.screen{position:relative;aspect-ratio:16/9;min-height:200px;min-width:0;max-width:100%;background:#000;border-radius:10px;overflow:hidden;border:1px solid #3a2f26}
+.screen #yt{position:absolute;inset:0;width:100%;height:100%}
+.demo-note{position:absolute;inset:0;display:grid;place-content:center;gap:6px;padding:20px;text-align:center;background:radial-gradient(circle at 50% 40%,#2a1d12,#0d0907)}
+.demo-note p{margin:0 auto;max-width:34ch;color:var(--muted);font-size:.95rem}
+.demo-note strong{font-family:var(--f-display);font-weight:400;color:var(--amber);font-size:1.35rem;line-height:1.2}
+.yt-link{display:inline-block;margin-top:10px;color:var(--amber);font-size:.92rem}
+.tapes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.tape{appearance:none;border:0;cursor:pointer;font:inherit;text-align:left;display:grid;gap:1px;padding:10px 12px 10px 20px;border-radius:4px;background:linear-gradient(var(--c),var(--c)) 0 0/9px 100% no-repeat,var(--paper);color:var(--paper-ink);box-shadow:0 3px 0 rgba(0,0,0,.45),0 8px 16px rgba(0,0,0,.35);transition:transform .15s,box-shadow .15s;min-width:0}
+.tape b{font-family:var(--f-hand);font-weight:700;color:var(--ink);font-size:1rem;line-height:1.2}
+.tape span{font-size:.72rem;color:var(--paper-muted)}
+.tape:hover{transform:translateY(-2px)}
+.tape[aria-current="true"]{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.45),0 0 0 2px var(--amber)}
+.tape[aria-current="true"] span{color:var(--maruti);font-weight:600}
+.tape:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.cover summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 14px;padding:14px 18px;border-radius:6px;background:linear-gradient(var(--tape,var(--maruti)),var(--tape,var(--maruti))) 0 0/6px 100% no-repeat,var(--paper);color:var(--paper-ink);box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.cover summary::-webkit-details-marker{display:none}
+.cover summary b{font-family:var(--f-hand);font-weight:700;color:var(--ink);font-size:1.1rem}
+.cover summary span{font-size:.8rem;color:var(--paper-muted)}
+.cover summary span span{font-size:inherit}
+.cover summary:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.cover[open] summary{border-radius:6px 6px 0 0;box-shadow:none}
+.cover[open] summary .open-tx{display:none}
+.cover:not([open]) summary .close-tx{display:none}
+.cover[open] .jcard{border-radius:0 0 6px 6px}
+
+.jcard{background:linear-gradient(var(--tape,var(--maruti)),var(--tape,var(--maruti))) 0 0/100% 6px no-repeat,var(--paper);color:var(--paper-ink);border-radius:6px;padding:22px 18px 18px;box-shadow:0 14px 30px rgba(0,0,0,.45);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px;min-width:0}
+.jcard h3{margin:0 0 6px;font-family:var(--f-hand);font-weight:700;color:var(--ink);font-size:1.15rem;line-height:1.2}
+.jcard h3 span{display:block;font-family:var(--f-body);font-weight:600;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--paper-muted)}
+.jcard ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.track{appearance:none;border:0;background:none;width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:1.6em minmax(0,1fr);gap:4px;padding:5px 4px;border-radius:4px;color:inherit;font:inherit}
+.track:hover{background:rgba(36,64,142,.08)}
+.track .n{font-family:var(--f-hand);color:var(--paper-muted);line-height:1.3}
+.track .t{display:block;font-family:var(--f-hand);color:var(--ink);font-size:1.02rem;line-height:1.25}
+.track .m{display:block;margin-top:5px;font-size:.74rem;color:var(--paper-muted);line-height:1.35}
+.track.on .n{color:var(--maruti)}
+.track.on .t{color:var(--maruti)}
+
+.foot{margin-top:30px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;color:var(--muted);font-size:.86rem}
+
+@media (max-width:860px){
+  .dash{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"stereo stereo" "gauges knob"}
+  .stereo{grid-area:stereo}
+  .gauges{grid-area:gauges}
+  .knob-wrap{grid-area:knob}
+  .glove{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:600px){
+  .windshield{aspect-ratio:4/3}
+  .ignition{top:65%;width:max-content;max-width:92%;grid-template-columns:auto auto;grid-template-rows:auto auto;justify-items:start;align-items:center;column-gap:14px;row-gap:2px;text-align:left}
+  .ign-dial{grid-row:1/3;width:80px}
+  .ign-tx{align-self:end;white-space:nowrap}
+  .ign-sub{align-self:start;max-width:25ch}
+  .stereo{grid-template-columns:minmax(0,1fr)}
+  .dash{padding:30px 14px 16px;gap:16px}
+  .speedo{max-width:160px}
+  .jcard{grid-template-columns:minmax(0,1fr)}
+  .knob-ring{width:100px;height:100px}
+  .knob{width:72px;height:72px}
+}
+@media (prefers-reduced-motion:reduce){
+  .charm,.pencil.on,.cassette.flipping,.ign-dial{animation:none}
+  .marquee span{animation:none;padding-left:0}
+}
+</style>
+
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<main class="car" id="car">
+  <header class="top">
+    <h1>Papa Ki Gaadi<small>Old songs for a long drive</small></h1>
+  </header>
+
+  <section class="windshield" aria-label="Night drive">
+    <canvas id="road" aria-hidden="true"></canvas>
+    <div class="mirror" aria-hidden="true">
+      <div class="stem"></div>
+      <div class="glass"></div>
+      <svg class="charm" viewBox="0 0 34 92" aria-hidden="true">
+        <line x1="17" y1="0" x2="17" y2="64" stroke="#0b0a09" stroke-width="1.5"/>
+        <path d="M17 8c-4 4-6 14-3 24 2-6 3-16 3-24z" fill="#2e8b3e"/>
+        <path d="M17 8c4 4 6 14 3 24-2-6-3-16-3-24z" fill="#3a9a45"/>
+        <path d="M17 32c-4 4-6 14-3 24 2-6 3-16 3-24z" fill="#2e8b3e"/>
+        <path d="M17 32c4 4 6 14 3 24-2-6-3-16-3-24z" fill="#3a9a45"/>
+        <ellipse cx="17" cy="73" rx="8.5" ry="9.5" fill="#e9d23c"/>
+        <ellipse cx="14" cy="69" rx="2.5" ry="3.5" fill="#f7ec8e"/>
+      </svg>
+    </div>
+    <button class="ignition" id="ignition" type="button">
+      <span class="ign-dial" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="13" cy="20" r="9" fill="#2a2622"/><circle cx="10" cy="20" r="2.4" fill="#d8d1c4"/><path d="M21 17.5h16v5h-3v3h-3v-3h-3v2h-3v-2h-4z" fill="#6f675b"/></svg></span>
+      <span class="ign-tx" id="ignTx">Turn the key</span>
+      <span class="ign-sub" id="ignSub">One tap. The tape does the rest.</span>
+    </button>
+  </section>
+
+  <section class="dash" aria-label="Dashboard">
+    <div class="gauges">
+      <svg class="speedo" id="speedo" viewBox="0 0 200 150" role="img" aria-label="Speedometer"></svg>
+      <div class="odo"><span id="odo">1,84,327.4</span> <span class="u">km</span></div>
+      <div class="fuel"><span>E</span><span class="bar"></span><span>F</span></div>
+    </div>
+
+    <div class="stereo">
+      <div class="brand"><b>Sangeet Deluxe</b><span>Stereo Cassette · 2×7W</span></div>
+      <div class="slot">
+        <div class="cassette" id="cassette">
+          <div class="label">
+            <div class="label-title" id="labelTitle">Kishore · Side A</div>
+            <div class="label-side" id="labelSide">A</div>
+            <div class="label-note">Long drive · 1994</div>
+          </div>
+          <div class="window"><canvas id="reels" aria-hidden="true"></canvas></div>
+          <div class="cbottom"></div>
+          <svg class="pencil" id="pencil" viewBox="0 0 12 90" aria-hidden="true">
+            <rect x="0" y="0" width="12" height="72" fill="#c62f2f"/>
+            <rect x="3" y="0" width="2.2" height="72" fill="#151313"/>
+            <rect x="7" y="0" width="2.2" height="72" fill="#151313"/>
+            <polygon points="0,72 12,72 6,90" fill="#e3c08f"/>
+            <polygon points="4.2,84.5 7.8,84.5 6,90" fill="#2a2725"/>
+          </svg>
+        </div>
+      </div>
+      <div class="deck">
+        <div class="lcd">
+          <div class="lcd-row"><span id="lcdSide">SIDE A</span><span id="lcdState">LOAD</span><span id="lcdCount">000</span></div>
+          <div class="marquee"><span id="lcdTrack">01 · Zindagi Ek Safar Hai Suhana · Kishore Kumar · Andaz (1971)</span></div>
+        </div>
+        <div class="keys">
+          <button class="key" id="kRew" type="button" aria-label="Previous song"><span class="ic">&#9664;&#xFE0E;&#9664;&#xFE0E;</span><span class="tx">Rew</span></button>
+          <button class="key play" id="kPlay" type="button" aria-pressed="false" aria-label="Play"><span class="ic" id="playIc">&#9654;&#xFE0E;</span><span class="tx" id="playTx">Play</span></button>
+          <button class="key" id="kFf" type="button" aria-label="Next song"><span class="ic">&#9654;&#xFE0E;&#9654;&#xFE0E;</span><span class="tx">FF</span></button>
+          <button class="key" id="kPencil" type="button" aria-label="Rewind with a pencil, back to the start of the song"><span class="ic"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13l1-4 7-7 3 3-7 7-4 1z" fill="#c62f2f" stroke="#1d1a16" stroke-width="1.2" stroke-linejoin="round"/><path d="M3 13l1-4 3 3z" fill="#e3c08f" stroke="#1d1a16" stroke-width="1.2" stroke-linejoin="round"/></svg></span><span class="tx">Pencil</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="knob-wrap">
+      <div class="knob-ring">
+        <svg id="ticks" viewBox="0 0 118 118" aria-hidden="true"></svg>
+        <div class="knob" id="knob" role="slider" tabindex="0" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70"></div>
+      </div>
+      <div class="knob-label">Volume <b id="volOut">7</b></div>
+    </div>
+  </section>
+
+  <section class="glove">
+    <div class="now" aria-live="polite">
+      <p class="eyebrow">Now playing</p>
+      <p class="now-t" id="nowT">Zindagi Ek Safar Hai Suhana</p>
+      <p class="now-m"><span id="nowM">Kishore Kumar · Andaz (1971)</span></p>
+      <a class="yt-link" id="ytLink" href="https://www.youtube.com/watch?v=BQUja75s4W4" target="_blank" rel="noopener">Open on YouTube ↗</a>
+      <p class="now-note" id="demoNote">Loading the tape…</p>
+    </div>
+    <div class="box">
+      <p class="eyebrow">The glovebox · 8 tapes · 89 songs</p>
+      <div class="tapes" id="tapes" aria-label="Tapes"></div>
+      <details class="cover" id="cover">
+        <summary><b id="coverName">Kishore, on the Road</b><span><span class="open-tx"><span id="coverCount">12 songs</span> · see the tracklist</span><span class="close-tx">Close</span></span></summary>
+        <div class="jcard" id="jcard" aria-label="Tracklist"></div>
+      </details>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Made by Arjun</span>
+    <span>Songs stream from YouTube and belong to their owners.</span>
+  </footer>
+  <div class="yt-hidden" aria-hidden="true"><div id="yt"></div></div>
+</main>
+
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+
+const TAPES = [
+  { name:"Kishore, on the Road", short:"Kishore", color:'#b8322a', tracks:[
+    { t:"Zindagi Ek Safar Hai Suhana", a:"Kishore Kumar", f:"Andaz", y:1971, id:'BQUja75s4W4' },
+    { t:"Musafir Hoon Yaaron", a:"Kishore Kumar", f:"Parichay", y:1972, id:'reuQDivpKRM' },
+    { t:"Chala Jata Hoon", a:"Kishore Kumar", f:"Mere Jeevan Saathi", y:1972, id:'UNjhqT_hlbg' },
+    { t:"Yeh Shaam Mastani", a:"Kishore Kumar", f:"Kati Patang", y:1970, id:'4m56f1UIAsY' },
+    { t:"Pal Pal Dil Ke Paas", a:"Kishore Kumar", f:"Blackmail", y:1973, id:'3LZAUjeIwcI' },
+    { t:"Ek Ajnabee Haseena Se", a:"Kishore Kumar", f:"Ajanabee", y:1974, id:'Ov9CLAcW9M8' },
+    { t:"Mere Sapnon Ki Rani", a:"Kishore Kumar", f:"Aradhana", y:1969, id:'Byc0064S8jw' },
+    { t:"O Mere Dil Ke Chain", a:"Kishore Kumar", f:"Mere Jeevan Saathi", y:1972, id:'ZkwYIyA7PAw' },
+    { t:"Chookar Mere Man Ko", a:"Kishore Kumar", f:"Yaarana", y:1981, id:'BOLYNw3x1lE' },
+    { t:"Ek Ladki Bheegi Bhaagi Si", a:"Kishore Kumar", f:"Chalti Ka Naam Gaadi", y:1958, id:'_nttJocQcr8' },
+    { t:"Rimjhim Gire Sawan", a:"Kishore Kumar", f:"Manzil", y:1979, id:'JQoSSJDZxOo' },
+    { t:"Neele Neele Ambar Par", a:"Kishore Kumar", f:"Kalaakaar", y:1983, id:'uc3hF-rH4Qg' }
+  ]},
+  { name:"Rafi Sahab", short:"Rafi", color:'#2f5d8a', tracks:[
+    { t:"Yahoo! Chahe Koi Mujhe Junglee Kahe", a:"Mohammed Rafi", f:"Junglee", y:1961, id:'WQuWuJtqqIs' },
+    { t:"Kya Hua Tera Wada", a:"Mohammed Rafi", f:"Hum Kisise Kum Nahin", y:1977, id:'4gtXTXWBK4o' },
+    { t:"Chaudhvin Ka Chand Ho", a:"Mohammed Rafi", f:"Chaudhvin Ka Chand", y:1960, id:'05IGr2S85v8' },
+    { t:"Baharon Phool Barsao", a:"Mohammed Rafi", f:"Suraj", y:1966, id:'P6p45E3lxb4' },
+    { t:"Likhe Jo Khat Tujhe", a:"Mohammed Rafi", f:"Kanyadaan", y:1968, id:'cDG0Gw5zTT8' },
+    { t:"Dil Ke Jharokhe Mein", a:"Mohammed Rafi", f:"Brahmachari", y:1968, id:'v9BfZf1x5ZU' },
+    { t:"Teri Pyari Pyari Surat Ko", a:"Mohammed Rafi", f:"Sasural", y:1961, id:'WOmT2nUBh0E' },
+    { t:"Aaj Mausam Bada Beimaan Hai", a:"Mohammed Rafi", f:"Loafer", y:1973, id:'TK_lH_N6VWM' },
+    { t:"Pukarta Chala Hoon Main", a:"Mohammed Rafi", f:"Mere Sanam", y:1965, id:'gLKBwutnPwA' },
+    { t:"Yeh Reshmi Zulfein", a:"Mohammed Rafi", f:"Do Raaste", y:1969, id:'trbrxYK_-EA' },
+    { t:"Badan Pe Sitare", a:"Mohammed Rafi", f:"Prince", y:1969, id:'MkABeVCv4lw' },
+    { t:"Tere Mere Sapne Ab Ek Rang Hain", a:"Mohammed Rafi", f:"Guide", y:1965, id:'yvqE7a_3V9c' }
+  ]},
+  { name:"Lata & Asha", short:"Lata & Asha", color:'#c2862f', tracks:[
+    { t:"Lag Ja Gale", a:"Lata Mangeshkar", f:"Woh Kaun Thi", y:1964, id:'TFr6G5zveS8' },
+    { t:"Piya Tose Naina Laage Re", a:"Lata Mangeshkar", f:"Guide", y:1965, id:'_lgACMqCpus' },
+    { t:"Ajeeb Dastan Hai Yeh", a:"Lata Mangeshkar", f:"Dil Apna Aur Preet Parai", y:1960, id:'niSarMZ2t7g' },
+    { t:"Aaj Phir Jeene Ki Tamanna Hai", a:"Lata Mangeshkar", f:"Guide", y:1965, id:'OjCdvmLfdaw' },
+    { t:"Dum Maro Dum", a:"Asha Bhosle", f:"Hare Rama Hare Krishna", y:1971, id:'8WrNOTOFr8E' },
+    { t:"Piya Tu Ab To Aaja", a:"Asha Bhosle", f:"Caravan", y:1971, id:'fjqkCjj59OQ' },
+    { t:"In Aankhon Ki Masti", a:"Asha Bhosle", f:"Umrao Jaan", y:1981, id:'PCCmg1tmMQs' }
+  ]},
+  { name:"Duets for Two", short:"Duets", color:'#3f7a52', tracks:[
+    { t:"Tere Bina Zindagi Se", a:"Lata & Kishore", f:"Aandhi", y:1975, id:'8-HnmVg0-O8' },
+    { t:"Abhi Na Jao Chhod Kar", a:"Asha & Rafi", f:"Hum Dono", y:1961, id:'yKF9e5WFzIc' },
+    { t:"Yeh Dosti", a:"Kishore & Manna Dey", f:"Sholay", y:1975, id:'kYJxj_SIL1o' },
+    { t:"Tum Aa Gaye Ho Noor Aa Gaya", a:"Lata & Kishore", f:"Aandhi", y:1975, id:'oiqou_Txi_0' },
+    { t:"Gata Rahe Mera Dil", a:"Kishore & Lata", f:"Guide", y:1965, id:'dbZW8Dral8o' },
+    { t:"Aaj Kal Tere Mere Pyar Ke Charche", a:"Rafi & Suman Kalyanpur", f:"Brahmachari", y:1968, id:'RSNuyKKTzwY' },
+    { t:"Kabhi Kabhi Mere Dil Mein", a:"Mukesh & Lata", f:"Kabhi Kabhie", y:1976, id:'87DchBGxqV8' },
+    { t:"Tere Mere Milan Ki Yeh Raina", a:"Lata & Kishore", f:"Abhimaan", y:1973, id:'lUwFGIl6K18' },
+    { t:"Hum Tum Ek Kamre Mein Band Ho", a:"Shailendra Singh & Lata", f:"Bobby", y:1973, id:'jxrcf-0ykkw' },
+    { t:"Chura Liya Hai Tumne Jo Dil Ko", a:"Asha & Rafi", f:"Yaadon Ki Baaraat", y:1973, id:'seFeZOgyFsc' },
+    { t:"Dekha Ek Khwab", a:"Kishore & Lata", f:"Silsila", y:1981, id:'pHoq08fjYV4' }
+  ]},
+  { name:"Mukesh & Manna Dey", short:"Mukesh", color:'#6b4a8a', tracks:[
+    { t:"Kahin Door Jab Din Dhal Jaye", a:"Mukesh", f:"Anand", y:1971, id:'w0AkZQUokog' },
+    { t:"Mera Joota Hai Japani", a:"Mukesh", f:"Shree 420", y:1955, id:'SRx49C9sfzk' },
+    { t:"Jeena Yahan Marna Yahan", a:"Mukesh", f:"Mera Naam Joker", y:1970, id:'k_ZEkEGjizQ' },
+    { t:"Sawan Ka Mahina", a:"Mukesh & Lata", f:"Milan", y:1967, id:'aUNx5YQuX-Y' },
+    { t:"Ek Pyar Ka Nagma Hai", a:"Mukesh & Lata", f:"Shor", y:1972, id:'or0tm85ytlU' },
+    { t:"Zindagi Kaisi Hai Paheli", a:"Manna Dey", f:"Anand", y:1971, id:'MpQ-2MU9xJw' },
+    { t:"Kasme Vaade Pyar Wafa", a:"Manna Dey", f:"Upkar", y:1967, id:'HKdfWbZvsLs' },
+    { t:"Pyar Hua Ikrar Hua", a:"Manna Dey & Lata", f:"Shree 420", y:1955, id:'xjxyculMGzE' },
+    { t:"Ae Bhai Zara Dekh Ke Chalo", a:"Manna Dey", f:"Mera Naam Joker", y:1970, id:'D4te0WiQkFA' },
+    { t:"Main Pal Do Pal Ka Shayar Hoon", a:"Mukesh", f:"Kabhi Kabhie", y:1976, id:'QkGqpVYjLUw' },
+    { t:"Dost Dost Na Raha", a:"Mukesh", f:"Sangam", y:1964, id:'MBs-IV-TSC4' },
+    { t:"Sajan Re Jhoot Mat Bolo", a:"Mukesh", f:"Teesri Kasam", y:1966, id:'M2IjwP6T6HQ' }
+  ]},
+  { name:"Ghazals for the Night", short:"Ghazals", color:'#25395c', tracks:[
+    { t:"Hothon Se Chhu Lo Tum", a:"Jagjit Singh", f:"Prem Geet", y:1981, id:'31f0mVT2Mvc' },
+    { t:"Tum Itna Jo Muskura Rahe Ho", a:"Jagjit Singh", f:"Arth", y:1982, id:'In3yneec2hk' },
+    { t:"Chupke Chupke Raat Din", a:"Ghulam Ali", f:"Nikaah", y:1982, id:'MWjaK_nW72E' },
+    { t:"Chitthi Na Koi Sandesh", a:"Jagjit Singh", f:"Dushman", y:1998, id:'udn7a0P-EgM' },
+    { t:"Hoshwalon Ko Khabar Kya", a:"Jagjit Singh", f:"Sarfarosh", y:1999, id:'hZuwe72Rtcc' },
+    { t:"Jhuki Jhuki Si Nazar", a:"Jagjit Singh", f:"Arth", y:1982, id:'xY2P6IAd0MI' },
+    { t:"Tumko Dekha To Yeh Khayal Aaya", a:"Jagjit & Chitra Singh", f:"Saath Saath", y:1982, id:'kPrIdIgat-g' },
+    { t:"Chitthi Aayi Hai", a:"Pankaj Udhas", f:"Naam", y:1986, id:'v0_IRIFYC0k' },
+    { t:"Aur Ahista Kijiye Baatein", a:"Pankaj Udhas", f:"", y:'', id:'lzbmsETV348' },
+    { t:"Ranjish Hi Sahi", a:"Mehdi Hassan", f:"", y:'', id:'hLA_GMeNWMc' },
+    { t:"Woh Kagaz Ki Kashti", a:"Jagjit Singh", f:"", y:'', id:'CbDQ8yjDcx8' },
+    { t:"Koi Fariyaad", a:"Jagjit Singh", f:"Tum Bin", y:2001, id:'8MN2bxMiB9A' }
+  ]},
+  { name:"The Eighties", short:"Eighties", color:'#c25a2c', tracks:[
+    { t:"Ek Do Teen", a:"Alka Yagnik", f:"Tezaab", y:1988, id:'00d_dLvH-6I' },
+    { t:"Tere Mere Hothon Pe", a:"Lata & Babla Mehta", f:"Chandni", y:1989, id:'8fXdWrvLCXc' },
+    { t:"Aaja Shaam Hone Aayi", a:"Lata & S.P. Balasubrahmanyam", f:"Maine Pyar Kiya", y:1989, id:'fGqoDP-QDAw' },
+    { t:"Ae Mere Humsafar", a:"Udit Narayan & Alka Yagnik", f:"Qayamat Se Qayamat Tak", y:1988, id:'6yM5E6znpas' },
+    { t:"Papa Kehte Hain", a:"Udit Narayan", f:"Qayamat Se Qayamat Tak", y:1988, id:'FEvBiayarlc' },
+    { t:"Saagar Kinare", a:"Kishore & Lata", f:"Saagar", y:1985, id:'jOEDV2PxT2k' },
+    { t:"Tujhse Naraz Nahi Zindagi", a:"Anup Ghoshal", f:"Masoom", y:1983, id:'LZ_YUOr-tYw' },
+    { t:"Jab Hum Jawan Honge", a:"Lata & Shabbir Kumar", f:"Betaab", y:1983, id:'TxsxuRDh62k' },
+    { t:"Gazab Ka Hai Din", a:"Udit Narayan & Alka Yagnik", f:"Qayamat Se Qayamat Tak", y:1988, id:'B1xmmB1vwVs' },
+    { t:"Dil Deewana", a:"Lata & S.P. Balasubrahmanyam", f:"Maine Pyar Kiya", y:1989, id:'5s68NXiaWgk' },
+    { t:"Tumse Milke", a:"Asha & Suresh Wadkar", f:"Parinda", y:1989, id:'hkqVdyFb2mg' }
+  ]},
+  { name:"The Nineties", short:"Nineties", color:'#2b8a8a', tracks:[
+    { t:"Pehla Nasha", a:"Udit Narayan & Sadhana Sargam", f:"Jo Jeeta Wohi Sikandar", y:1992, id:'O-YPVpUpIh4' },
+    { t:"Tujhe Dekha To", a:"Kumar Sanu & Lata", f:"Dilwale Dulhania Le Jayenge", y:1995, id:'EYA-aTnbKIQ' },
+    { t:"Ek Ladki Ko Dekha", a:"Kumar Sanu", f:"1942: A Love Story", y:1994, id:'H5sheEWfsOQ' },
+    { t:"Chura Ke Dil Mera", a:"Kumar Sanu & Alka Yagnik", f:"Main Khiladi Tu Anari", y:1994, id:'X9CQUEniTVA' },
+    { t:"Dheere Dheere Se", a:"Kumar Sanu & Anuradha Paudwal", f:"Aashiqui", y:1990, id:'epUMTkG5pGk' },
+    { t:"Saanson Ki Zaroorat Hai Jaise", a:"Kumar Sanu", f:"Aashiqui", y:1990, id:'VjMeDYdaztk' },
+    { t:"Kuch Kuch Hota Hai", a:"Udit Narayan & Alka Yagnik", f:"Kuch Kuch Hota Hai", y:1998, id:'S9DsCP9Th7Y' },
+    { t:"Mere Khwabon Mein Jo Aaye", a:"Lata Mangeshkar", f:"Dilwale Dulhania Le Jayenge", y:1995, id:'s1LozokQjIg' },
+    { t:"Chaiyya Chaiyya", a:"Sukhwinder Singh & Sapna Awasthi", f:"Dil Se", y:1998, id:'T8_k-g1NQgA' },
+    { t:"Jab Koi Baat Bigad Jaye", a:"Kumar Sanu & Sadhana Sargam", f:"Jurm", y:1990, id:'83V0ah7EfiE' },
+    { t:"Bahut Pyar Karte Hain", a:"Anuradha Paudwal", f:"Saajan", y:1991, id:'2HmwKUc57cI' },
+    { t:"Dil Hai Ki Manta Nahin", a:"Kumar Sanu & Anuradha Paudwal", f:"Dil Hai Ki Manta Nahin", y:1991, id:'NiVVvkUCWZo' }
+  ]}
+];
+
+const S = { tape:0, idx:0, playing:false, wantPlay:false, started:false, vol:70, mode:'loading', fast:0, errors:0, pencil:false };
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let player = null;
+const tape = () => TAPES[S.tape];
+const cur = () => tape().tracks[S.idx];
+const half = tp => Math.ceil(tp.tracks.length/2);
+const sideOf = (ti, i) => i < half(TAPES[ti]) ? 0 : 1;
+const pad = n => String(n).padStart(2,'0');
+const total = TAPES.reduce((n,t)=>n+t.tracks.length,0);
+const meta = t => [t.a, t.f ? (t.y ? `${t.f} (${t.y})` : t.f) : (t.y ? String(t.y) : '')].filter(Boolean).join(' · ');
+
+/* ---------- Demo tape (used when YouTube can't load) ---------- */
+const Demo = (() => {
+  let ctx = null, master, volG, hissG, wowG, timer = 0, startAt = 0, offset = 0, running = false;
+  let nextT = 0, step = 0, mel = [], prog = [0,9,5,7], tonic = 196, spb = .3, volume = .7;
+  const dur = 150;
+  function rng(seed){ let s = seed % 233280; return () => { s = (s*9301 + 49297) % 233280; return s/233280; }; }
+  function load(side, idx){
+    const r = rng(side*131 + idx*17 + 11);
+    const scale = side === 0 ? [0,2,4,7,9,12,14,16] : [0,2,3,5,7,8,12,14,15];
+    prog = side === 0 ? [0,9,5,7] : [0,8,5,7];
+    tonic = (side === 0 ? 196 : 174.6) * Math.pow(2, Math.floor(r()*5)/12);
+    spb = 60 / (side === 0 ? (92 + r()*16) : (68 + r()*10)) / 2;
+    let i = Math.floor(scale.length/2); mel = [];
+    for (let k = 0; k < 32; k++){
+      if (k % 4 !== 0 && r() < (side === 0 ? .22 : .35)) { mel.push(null); continue; }
+      i = Math.max(0, Math.min(scale.length-1, i + Math.round((r()-.5)*3.2)));
+      mel.push(scale[i]);
+    }
+    offset = 0; step = 0;
+    if (ctx){ startAt = ctx.currentTime; nextT = ctx.currentTime + .05; }
+  }
+  function ensure(){
+    if (ctx) return true;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = .55;
+    volG = ctx.createGain(); volG.gain.value = volume;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400; lp.Q.value = .4;
+    master.connect(lp); lp.connect(volG); volG.connect(ctx.destination);
+    const buf = ctx.createBuffer(1, ctx.sampleRate*2, ctx.sampleRate), d = buf.getChannelData(0);
+    for (let k = 0; k < d.length; k++) d[k] = Math.random()*2 - 1;
+    const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
+    const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 3500;
+    hissG = ctx.createGain(); hissG.gain.value = 0;
+    src.connect(hp); hp.connect(hissG); hissG.connect(volG); src.start();
+    const wow = ctx.createOscillator(); wow.frequency.value = .55;
+    wowG = ctx.createGain(); wowG.gain.value = 9; wow.connect(wowG); wow.start();
+    return true;
+  }
+  function note(t, f, len, type, v){
+    const o = ctx.createOscillator(); o.type = type; o.frequency.value = f;
+    wowG.connect(o.detune);
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(.0001, t);
+    g.gain.exponentialRampToValueAtTime(v, t + .03);
+    g.gain.exponentialRampToValueAtTime(.0001, t + len);
+    o.connect(g); g.connect(master);
+    o.start(t); o.stop(t + len + .05);
+    o.onended = () => { try { wowG.disconnect(o.detune); } catch(e){} };
+  }
+  function sched(s, t){
+    const root = prog[Math.floor(s/8) % 4];
+    if (s % 8 === 0) note(t, tonic*Math.pow(2,(root-12)/12), spb*7.5, 'sine', .28);
+    if (s % 8 === 4) note(t, tonic*Math.pow(2,(root-5)/12), spb*3.5, 'sine', .12);
+    const m = mel[s % 32];
+    if (m != null) note(t, tonic*Math.pow(2,m/12), spb*1.9, 'triangle', .16);
+  }
+  function tick(){ while (nextT < ctx.currentTime + .15){ sched(step, nextT); nextT += spb; step++; } }
+  const api = {
+    dur, load,
+    start(){
+      if (!ensure()) return;
+      ctx.resume();
+      startAt = ctx.currentTime; nextT = ctx.currentTime + .06; step = Math.floor(offset/spb);
+      hissG.gain.setTargetAtTime(.018, ctx.currentTime, .1);
+      clearInterval(timer); timer = setInterval(tick, 30); running = true;
+    },
+    stop(){
+      if (!ctx) return;
+      offset = api.time(); running = false; clearInterval(timer);
+      hissG.gain.setTargetAtTime(0, ctx.currentTime, .05);
+    },
+    time(){ return running && ctx ? offset + ctx.currentTime - startAt : offset; },
+    seek(t){ offset = t; if (ctx){ startAt = ctx.currentTime; step = Math.floor(t/spb); if (running) nextT = ctx.currentTime + .05; } },
+    vol(v){ volume = v/100; if (ctx && volG) volG.gain.setTargetAtTime(volume, ctx.currentTime, .05); }
+  };
+  return api;
+})();
+
+/* ---------- Glovebox: tapes + tracklist ---------- */
+const jc = $('jcard'), box = $('tapes');
+function buildBox(){
+  box.innerHTML = TAPES.map((tp, ti) =>
+    `<button class="tape" type="button" data-t="${ti}" style="--c:${tp.color}"><b>${tp.name}</b><span>${tp.tracks.length} songs</span></button>`).join('');
+  box.addEventListener('click', e => {
+    const b = e.target.closest('.tape'); if (!b) return;
+    const ti = +b.dataset.t;
+    if (ti === S.tape && (S.playing || S.wantPlay)) return;
+    loadTrack(ti, 0, true);
+  });
+  jc.addEventListener('click', e => {
+    const b = e.target.closest('.track'); if (!b) return;
+    loadTrack(S.tape, +b.dataset.i, true);
+    $('cover').open = false;
+  });
+}
+let builtFor = -1;
+function buildJ(){
+  if (builtFor === S.tape) return;
+  builtFor = S.tape;
+  const tp = tape(), h = half(tp);
+  const col = (from, to, key) => `<div><h3><span>Side ${key}</span>${tp.short}</h3><ol>` +
+    tp.tracks.slice(from, to).map((t, k) => { const i = from + k;
+      return `<li><button class="track" type="button" data-i="${i}"><span class="n">${i+1}.</span><span><span class="t">${t.t}</span><span class="m">${meta(t)}</span></span></button></li>`; }).join('') + '</ol></div>';
+  jc.innerHTML = col(0, h, 'A') + col(h, tp.tracks.length, 'B');
+  $('coverName').textContent = tp.name;
+  $('cover').style.setProperty('--tape', tp.color);
+  $('coverCount').textContent = tp.tracks.length + ' songs';
+}
+
+/* ---------- Render ---------- */
+function render(){
+  const tp = tape(), t = cur(), key = sideOf(S.tape, S.idx) ? 'B' : 'A';
+  buildJ();
+  $('labelTitle').textContent = `${tp.short} · Side ${key}`;
+  $('labelSide').textContent = key;
+  $('cassette').style.setProperty('--tape', tp.color);
+  $('lcdSide').textContent = `T${S.tape+1} SIDE ${key}`;
+  $('lcdState').textContent = S.playing ? 'PLAY' : (S.mode === 'loading' && S.wantPlay ? 'LOAD' : (S.started ? 'PAUSE' : 'STOP'));
+  const txt = `${pad(S.idx+1)} · ${t.t} · ${meta(t)}${S.mode === 'demo' ? ' · DEMO TAPE' : ''}`;
+  const lt = $('lcdTrack');
+  if (lt.textContent !== txt){ lt.textContent = txt; lt.style.setProperty('--dur', Math.max(10, txt.length*.3) + 's'); }
+  const kp = $('kPlay');
+  kp.setAttribute('aria-pressed', S.playing ? 'true' : 'false');
+  kp.setAttribute('aria-label', S.playing ? 'Pause' : 'Play');
+  $('playIc').textContent = S.playing ? '❚❚' : '▶︎';
+  $('playTx').textContent = S.playing ? 'Pause' : 'Play';
+  $('car').classList.toggle('is-playing', S.playing);
+  const ign = $('ignition');
+  ign.hidden = S.playing || S.wantPlay;
+  $('ignTx').textContent = S.started ? 'Paused' : 'Turn the key';
+  $('ignSub').textContent = S.started ? 'Tap to keep driving.' : 'One tap. The tape does the rest.';
+  $('ytLink').href = 'https://www.youtube.com/watch?v=' + t.id;
+  $('nowT').textContent = t.t;
+  $('nowM').textContent = meta(t);
+  box.querySelectorAll('.tape').forEach(b => {
+    const on = +b.dataset.t === S.tape;
+    if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+    b.querySelector('span').textContent = on ? 'In the deck' : TAPES[+b.dataset.t].tracks.length + ' songs';
+  });
+  jc.querySelectorAll('.track').forEach(b => {
+    const on = +b.dataset.i === S.idx;
+    b.classList.toggle('on', on);
+    if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+    b.querySelector('.n').textContent = on ? '▶︎' : (+b.dataset.i + 1) + '.';
+  });
+}
+
+/* ---------- YouTube ---------- */
+function loadYT(){
+  const s = document.createElement('script');
+  s.src = 'https://www.youtube.com/iframe_api';
+  s.onerror = () => goDemo();
+  document.head.appendChild(s);
+  setTimeout(() => { if (S.mode === 'loading') goDemo(); }, 6000);
+}
+window.onYouTubeIframeAPIReady = () => {
+  if (S.mode === 'demo') return;
+  S.mode = 'init';
+  player = new YT.Player('yt', {
+    width:'1', height:'1', videoId: cur().id,
+    playerVars:{ playsinline:1, rel:0, controls:0, disablekb:1, fs:0, modestbranding:1, iv_load_policy:3 },
+    events:{ onReady, onStateChange, onError }
+  });
+};
+function onReady(){
+  S.mode = 'yt';
+  $('demoNote').hidden = true;
+  player.setVolume(S.vol);
+  if (S.wantPlay){ S.wantPlay = false; player.loadVideoById(cur().id); S.playing = true; }
+  else player.cueVideoById(cur().id);
+  render();
+}
+function onStateChange(e){
+  if (e.data === 1){ S.playing = true; S.errors = 0; }
+  else if (e.data === 2){ S.playing = false; }
+  else if (e.data === 0){ next(true); return; }
+  render();
+}
+function onError(){
+  S.errors++;
+  if (S.errors >= total){ goDemo(); return; }
+  next(true);
+}
+function goDemo(){
+  if (S.mode === 'demo') return;
+  S.mode = 'demo';
+  if (player){ try { player.destroy(); } catch(e){} player = null; }
+  const n = $('demoNote');
+  n.hidden = false;
+  n.textContent = 'Preview tape: YouTube can’t play inside this preview, so a soft demo tune is playing. On your own site, the real songs play.';
+  Demo.load(S.tape % 2, S.idx);
+  if (S.wantPlay){ S.wantPlay = false; play(); }
+  render();
+}
+
+/* ---------- Transport ---------- */
+function getT(){
+  if (S.mode === 'yt' && player && player.getCurrentTime) return player.getCurrentTime() || 0;
+  if (S.mode === 'demo') return Demo.time();
+  return 0;
+}
+function getD(){
+  if (S.mode === 'yt' && player && player.getDuration) return player.getDuration() || 0;
+  if (S.mode === 'demo') return Demo.dur;
+  return 0;
+}
+function seek(t){
+  if (S.mode === 'yt' && player) player.seekTo(t, true);
+  else if (S.mode === 'demo') Demo.seek(t);
+}
+function play(){
+  if (S.mode === 'demo'){ Demo.start(); S.playing = true; }
+  else if (S.mode === 'yt' && player){ player.playVideo(); S.playing = true; }
+  else { S.wantPlay = true; }
+  if (S.playing) S.started = true;
+  render();
+}
+function pause(){
+  if (S.mode === 'demo') Demo.stop();
+  else if (S.mode === 'yt' && player) player.pauseVideo();
+  S.playing = false; S.wantPlay = false;
+  render();
+}
+function toggle(){ (S.playing || S.wantPlay) ? pause() : play(); }
+function spin(v, ms = 650){ S.fast = v; clearTimeout(spin.t); spin.t = setTimeout(() => { if (!S.pencil) S.fast = 0; }, ms); }
+function flipCassette(){
+  if (reduce) return;
+  const c = $('cassette');
+  c.classList.remove('flipping'); void c.offsetWidth; c.classList.add('flipping');
+}
+function save(){ try { localStorage.setItem('papa-ki-gaadi', JSON.stringify({ v:S.vol, t:S.tape, i:S.idx })); } catch(e){} }
+function restore(){
+  try {
+    const o = JSON.parse(localStorage.getItem('papa-ki-gaadi') || 'null');
+    if (!o) return;
+    if (TAPES[o.t] && TAPES[o.t].tracks[o.i]){ S.tape = o.t; S.idx = o.i; }
+    if (typeof o.v === 'number') S.vol = o.v;
+  } catch(e){}
+}
+function loadTrack(ti, idx, autoplay){
+  const flipped = ti !== S.tape || sideOf(ti, idx) !== sideOf(S.tape, S.idx);
+  S.tape = ti; S.idx = idx;
+  save();
+  if (flipped) flipCassette();
+  if (S.mode === 'yt' && player){
+    if (autoplay){ player.loadVideoById(cur().id); S.playing = true; S.started = true; }
+    else player.cueVideoById(cur().id);
+  } else if (S.mode === 'demo'){
+    Demo.stop(); Demo.load(ti % 2, idx);
+    if (autoplay){ Demo.start(); S.playing = true; S.started = true; }
+  } else if (autoplay){ S.wantPlay = true; }
+  render();
+}
+function next(auto){
+  let ti = S.tape, idx = S.idx + 1;
+  if (idx >= TAPES[ti].tracks.length){ idx = 0; ti = (ti + 1) % TAPES.length; }
+  spin(6);
+  loadTrack(ti, idx, auto || S.playing);
+}
+function prev(){
+  if (getT() > 5){ seek(0); spin(-6); return; }
+  let ti = S.tape, idx = S.idx - 1;
+  if (idx < 0){ ti = (ti - 1 + TAPES.length) % TAPES.length; idx = TAPES[ti].tracks.length - 1; }
+  spin(-6);
+  loadTrack(ti, idx, S.playing);
+}
+function pencil(){
+  if (S.pencil) return;
+  S.pencil = true;
+  const p = $('pencil');
+  p.classList.add('on');
+  S.fast = -7;
+  setTimeout(() => {
+    S.fast = 0; S.pencil = false;
+    p.classList.remove('on');
+    seek(0);
+  }, reduce ? 300 : 1500);
+}
+
+$('kPlay').addEventListener('click', toggle);
+$('kFf').addEventListener('click', () => { next(false); });
+$('kRew').addEventListener('click', () => { prev(); });
+$('ignition').addEventListener('click', e => { e.stopPropagation(); play(); });
+document.querySelector('.windshield').addEventListener('click', () => toggle());
+$('kPencil').addEventListener('click', pencil);
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' && !e.target.closest('button,[role=slider],a,input,textarea')){ e.preventDefault(); toggle(); }
+});
+
+/* ---------- Volume knob ---------- */
+const knob = $('knob');
+let drag = null;
+function setVol(v){
+  v = Math.max(0, Math.min(100, Math.round(v)));
+  S.vol = v;
+  knob.style.setProperty('--a', (-135 + v*2.7) + 'deg');
+  knob.setAttribute('aria-valuenow', v);
+  knob.setAttribute('aria-valuetext', 'Volume ' + Math.round(v/10));
+  $('volOut').textContent = Math.round(v/10);
+  if (player && S.mode === 'yt' && player.setVolume) player.setVolume(v);
+  Demo.vol(v);
+  save();
+}
+knob.addEventListener('pointerdown', e => { drag = { x:e.clientX, y:e.clientY, v:S.vol }; knob.setPointerCapture(e.pointerId); knob.style.cursor = 'grabbing'; });
+knob.addEventListener('pointermove', e => { if (!drag) return; setVol(drag.v + (drag.y - e.clientY)*.7 + (e.clientX - drag.x)*.7); });
+['pointerup','pointercancel'].forEach(ev => knob.addEventListener(ev, () => { drag = null; knob.style.cursor = ''; }));
+knob.addEventListener('wheel', e => { e.preventDefault(); setVol(S.vol - e.deltaY*.05); }, { passive:false });
+knob.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp' || e.key === 'ArrowRight'){ setVol(S.vol + 5); e.preventDefault(); }
+  else if (e.key === 'ArrowDown' || e.key === 'ArrowLeft'){ setVol(S.vol - 5); e.preventDefault(); }
+  else if (e.key === 'Home'){ setVol(0); e.preventDefault(); }
+  else if (e.key === 'End'){ setVol(100); e.preventDefault(); }
+});
+function buildTicks(){
+  let s = '';
+  for (let i = 0; i <= 10; i++){
+    const a = (-135 + i*27) * Math.PI/180, major = i % 5 === 0;
+    const r1 = major ? 47 : 50, r2 = 56;
+    s += `<line x1="${(59+r1*Math.sin(a)).toFixed(1)}" y1="${(59-r1*Math.cos(a)).toFixed(1)}" x2="${(59+r2*Math.sin(a)).toFixed(1)}" y2="${(59-r2*Math.cos(a)).toFixed(1)}" stroke="#ab9a82" stroke-width="${major?2.2:1.4}" stroke-linecap="round"/>`;
+  }
+  $('ticks').innerHTML = s;
+}
+
+/* ---------- Speedometer ---------- */
+function buildSpeedo(){
+  const P = (r, v) => { const th = (210 - v*2) * Math.PI/180; return [100 + r*Math.cos(th), 100 - r*Math.sin(th)]; };
+  let g = '<rect x="3" y="3" width="194" height="144" rx="20" fill="#0c0a08" stroke="#5d554a" stroke-width="2"/>';
+  const [ax, ay] = P(80, 100), [bx, by] = P(80, 120);
+  g += `<path d="M${ax.toFixed(1)} ${ay.toFixed(1)} A80 80 0 0 1 ${bx.toFixed(1)} ${by.toFixed(1)}" fill="none" stroke="#b8322a" stroke-width="5"/>`;
+  for (let v = 0; v <= 120; v += 10){
+    const maj = v % 20 === 0;
+    const [x1, y1] = P(maj ? 68 : 73, v), [x2, y2] = P(80, v);
+    g += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#efe9de" stroke-width="${maj?2.2:1.2}"/>`;
+    if (maj){ const [tx, ty] = P(55, v); g += `<text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}" fill="#efe9de" font-size="12" font-family="Mukta, sans-serif" font-weight="600" text-anchor="middle" dominant-baseline="central">${v}</text>`; }
+  }
+  g += '<text x="100" y="130" fill="#ab9a82" font-size="10" text-anchor="middle" font-family="Mukta, sans-serif" letter-spacing="2">KM/H</text>';
+  g += '<g id="needle" transform="rotate(-120 100 100)"><line x1="100" y1="112" x2="100" y2="30" stroke="#ffb340" stroke-width="3" stroke-linecap="round"/></g>';
+  g += '<circle cx="100" cy="100" r="7" fill="#3b342c" stroke="#7d7568"/>';
+  $('speedo').innerHTML = g;
+}
+
+/* ---------- Canvas helpers ---------- */
+function fit(cv){
+  const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1);
+  const w = Math.max(1, Math.round(r.width*d)), h = Math.max(1, Math.round(r.height*d));
+  if (cv.width !== w || cv.height !== h){ cv.width = w; cv.height = h; }
+  return [w, h];
+}
+
+/* ---------- Reels ---------- */
+const rv = $('reels'), rx = rv.getContext('2d');
+let aL = 0, aR = 0;
+function drawReel(cx, cy, r, rh, ang){
+  const g = rx.createRadialGradient(cx, cy, rh, cx, cy, r);
+  g.addColorStop(0, '#2c1a10'); g.addColorStop(.85, '#4a2e1d'); g.addColorStop(1, '#5a3a25');
+  rx.fillStyle = g; rx.beginPath(); rx.arc(cx, cy, r, 0, Math.PI*2); rx.fill();
+  rx.strokeStyle = 'rgba(255,220,180,.08)'; rx.lineWidth = 1;
+  rx.beginPath(); rx.arc(cx, cy, r*.78, 0, Math.PI*2); rx.stroke();
+  rx.fillStyle = '#f2eee6'; rx.beginPath(); rx.arc(cx, cy, rh, 0, Math.PI*2); rx.fill();
+  rx.fillStyle = '#1b1613'; rx.beginPath(); rx.arc(cx, cy, rh*.66, 0, Math.PI*2); rx.fill();
+  rx.save(); rx.translate(cx, cy); rx.rotate(ang); rx.fillStyle = '#f2eee6';
+  for (let k = 0; k < 6; k++){ rx.rotate(Math.PI/3); rx.fillRect(-rh*.11, -rh*.68, rh*.22, rh*.3); }
+  rx.restore();
+}
+function drawReels(dt, p){
+  const [w, h] = fit(rv);
+  rx.clearRect(0, 0, w, h);
+  rx.fillStyle = '#1b1613'; rx.fillRect(0, 0, w, h);
+  const rh = w*.07, rmax = w*.235, rmin2 = (rh*1.5)**2, cy = h/2;
+  const rl = Math.sqrt(rmin2 + (rmax*rmax - rmin2)*(1 - p));
+  const rr = Math.sqrt(rmin2 + (rmax*rmax - rmin2)*p);
+  const v = ((S.playing ? 1 : 0) + S.fast) * rmax * 1.3;
+  aL += v/rl*dt; aR += v/rr*dt;
+  drawReel(w*.26, cy, rl, rh, aL);
+  drawReel(w*.74, cy, rr, rh, aR);
+  const sheen = rx.createLinearGradient(0, 0, w, h);
+  sheen.addColorStop(0, 'rgba(255,255,255,.10)'); sheen.addColorStop(.4, 'rgba(255,255,255,0)'); sheen.addColorStop(1, 'rgba(255,255,255,.04)');
+  rx.fillStyle = sheen; rx.fillRect(0, 0, w, h);
+}
+
+/* ---------- Road ---------- */
+const rd = $('road'), rc = rd.getContext('2d');
+const stars = Array.from({ length:70 }, () => [Math.random(), Math.random()*.42, Math.random()*1.1 + .3]);
+const hills = Array.from({ length:41 }, (_, i) => .5 - (Math.sin(i*.55)*.022 + Math.sin(i*1.7 + 1)*.012 + .028));
+let dist = 0, carV = 0, oncoming = null;
+function hash(n){ const x = Math.sin(n*127.1)*43758.5453; return x - Math.floor(x); }
+function glow(x, y, r, color){
+  const g = rc.createRadialGradient(x, y, 0, x, y, r);
+  g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)');
+  rc.fillStyle = g; rc.beginPath(); rc.arc(x, y, r, 0, Math.PI*2); rc.fill();
+}
+function drawRoad(dt){
+  const [w, h] = fit(rd);
+  const hz = h*.5, G = h*1.08 - hz, X = w*.72;
+  const proj = (xw, z, yw = 0) => [w/2 + xw*X/z, hz + (1 - yw)*G/z];
+  const speed = carV*.4*(reduce ? 0 : 1);
+  dist += speed*dt;
+
+  let g = rc.createLinearGradient(0, 0, 0, hz);
+  g.addColorStop(0, '#070917'); g.addColorStop(.7, '#171631'); g.addColorStop(1, '#3a2733');
+  rc.fillStyle = g; rc.fillRect(0, 0, w, hz + 1);
+  rc.fillStyle = '#e8e2d0';
+  for (const [sx, sy, sr] of stars){ rc.globalAlpha = .35 + sr*.3; rc.beginPath(); rc.arc(sx*w, sy*h, sr*(w/900), 0, Math.PI*2); rc.fill(); }
+  rc.globalAlpha = 1;
+  glow(w*.8, h*.16, h*.12, 'rgba(240,230,200,.25)');
+  rc.fillStyle = '#efe8d4'; rc.beginPath(); rc.arc(w*.8, h*.16, h*.035, 0, Math.PI*2); rc.fill();
+  rc.fillStyle = '#0c0d18'; rc.beginPath(); rc.moveTo(0, hz);
+  hills.forEach((y, i) => rc.lineTo(i/(hills.length - 1)*w, y*h));
+  rc.lineTo(w, hz); rc.closePath(); rc.fill();
+
+  rc.fillStyle = '#0b0a0d'; rc.fillRect(0, hz, w, h - hz);
+  const [l0x, l0y] = proj(-1, .9), [r0x] = proj(1, .9), [lfx, lfy] = proj(-1, 400), [rfx] = proj(1, 400);
+  g = rc.createLinearGradient(0, lfy, 0, l0y);
+  g.addColorStop(0, '#141318'); g.addColorStop(1, '#2a2830');
+  rc.fillStyle = g; rc.beginPath(); rc.moveTo(l0x, l0y); rc.lineTo(r0x, l0y); rc.lineTo(rfx, lfy); rc.lineTo(lfx, lfy); rc.closePath(); rc.fill();
+  rc.strokeStyle = 'rgba(230,225,210,.22)'; rc.lineWidth = Math.max(1, w/600);
+  for (const s of [-.94, .94]){ const [ax, ay] = proj(s, .9), [bx, by] = proj(s, 400); rc.beginPath(); rc.moveTo(ax, ay); rc.lineTo(bx, by); rc.stroke(); }
+
+  g = rc.createRadialGradient(w/2, h, 0, w/2, h, h*.75);
+  g.addColorStop(0, 'rgba(255,228,170,.16)'); g.addColorStop(1, 'rgba(255,228,170,0)');
+  rc.fillStyle = g; rc.fillRect(0, hz, w, h - hz);
+
+  const off = dist % 6;
+  for (let k = 0; k < 40; k++){
+    const z0 = 1 + k*6 - off; if (z0 < .6) continue;
+    const z1 = z0 + 2.5, hwA = .025*X/z0, hwB = .025*X/z1;
+    const ya = proj(0, z0)[1], yb = proj(0, z1)[1];
+    rc.fillStyle = `rgba(232,204,130,${Math.min(.85, 3/z0)})`;
+    rc.beginPath(); rc.moveTo(w/2 - hwA, ya); rc.lineTo(w/2 + hwA, ya); rc.lineTo(w/2 + hwB, yb); rc.lineTo(w/2 - hwB, yb); rc.closePath(); rc.fill();
+  }
+
+  const items = [], zmin = .7;
+  const addPeriodic = (period, count, fn) => {
+    const k0 = Math.ceil((dist + zmin)/period);
+    for (let k = k0; k < k0 + count; k++){ const z = k*period - dist; if (z > zmin) fn(k, z); }
+  };
+  addPeriodic(14, 12, (k, z) => items.push({ z, type:'lamp' }));
+  addPeriodic(5, 34, (k, z) => { if (hash(k) < .6) items.push({ z, type:'tree', x:1.5 + hash(k + 9)*2.2, hgt:2.4 + hash(k + 3)*1.8 }); });
+  addPeriodic(170, 2, (k, z) => { if (z < 160) items.push({ z, type:'dhaba' }); });
+
+  if (!oncoming && carV > 5 && !reduce && Math.random() < dt*.05) oncoming = { z:160 };
+  if (oncoming){ oncoming.z -= (speed + 22)*dt; if (oncoming.z < .9) oncoming = null; else items.push({ z:oncoming.z, type:'car' }); }
+
+  items.sort((a, b) => b.z - a.z);
+  for (const it of items){
+    const z = it.z, fade = Math.max(0, Math.min(1, 1.5 - z/110));
+    if (fade <= 0) continue;
+    rc.globalAlpha = fade;
+    if (it.type === 'lamp'){
+      const [bx, by] = proj(-1.35, z), [tx, ty] = proj(-1.35, z, 2.6), [hx, hy] = proj(-1.05, z, 2.6);
+      const [px, py] = proj(-.7, z);
+      rc.fillStyle = 'rgba(255,160,60,.10)'; rc.beginPath(); rc.ellipse(px, py, .7*X/z, .16*G/z, 0, 0, Math.PI*2); rc.fill();
+      rc.strokeStyle = '#050506'; rc.lineWidth = Math.max(1, .06*X/z);
+      rc.beginPath(); rc.moveTo(bx, by); rc.lineTo(tx, ty); rc.lineTo(hx, hy); rc.stroke();
+      glow(hx, hy, Math.min(h*.4, .9*X/z), 'rgba(255,172,72,.5)');
+      rc.fillStyle = '#ffdca6'; rc.fillRect(hx - .1*X/z, hy, .2*X/z, Math.max(1, .05*G/z));
+    } else if (it.type === 'tree'){
+      const [bx, by] = proj(it.x, z), [cx, cy] = proj(it.x, z, it.hgt);
+      rc.strokeStyle = '#050506'; rc.lineWidth = Math.max(1, .12*X/z);
+      rc.beginPath(); rc.moveTo(bx, by); rc.lineTo(cx, cy); rc.stroke();
+      rc.fillStyle = '#06070b'; rc.beginPath(); rc.ellipse(cx, cy, .85*X/z, 1.05*G/z, 0, 0, Math.PI*2); rc.fill();
+    } else if (it.type === 'dhaba'){
+      const [x1, y1] = proj(1.15, z, 2.3), [x2, y2] = proj(2.9, z, 1.3), [px] = proj(2, z);
+      const [, pb] = proj(2, z);
+      glow((x1 + x2)/2, (y1 + y2)/2, Math.min(h*.5, 1.6*X/z), 'rgba(255,120,60,.35)');
+      rc.strokeStyle = '#050506'; rc.lineWidth = Math.max(1, .07*X/z);
+      rc.beginPath(); rc.moveTo(px, y2); rc.lineTo(px, pb); rc.stroke();
+      rc.fillStyle = '#b8322a'; rc.fillRect(x1, y1, x2 - x1, y2 - y1);
+      const fs = .55*G/z;
+      if (fs > 7){
+        rc.fillStyle = '#ffe6a8';
+        rc.font = `700 ${fs*.8}px "Mukta", sans-serif`;
+        rc.textAlign = 'center'; rc.textBaseline = 'middle';
+        rc.fillText('DHABA', (x1 + x2)/2, (y1 + y2)/2, (x2 - x1)*.9);
+      }
+    } else if (it.type === 'car'){
+      for (const xw of [.42, .78]){ const [lx, ly] = proj(xw, z, .7); glow(lx, ly, Math.min(h*.35, .45*X/z), 'rgba(255,245,215,.85)'); }
+    }
+  }
+  rc.globalAlpha = 1;
+
+  const bt = h*.8;
+  g = rc.createLinearGradient(0, bt, 0, h);
+  g.addColorStop(0, '#8e2620'); g.addColorStop(1, '#3d0f0c');
+  rc.fillStyle = g; rc.beginPath(); rc.moveTo(0, h); rc.lineTo(0, h*.93);
+  rc.quadraticCurveTo(w/2, bt - h*.05, w, h*.93); rc.lineTo(w, h); rc.closePath(); rc.fill();
+  rc.strokeStyle = 'rgba(255,200,150,.18)'; rc.lineWidth = Math.max(1, w/500);
+  rc.beginPath(); rc.moveTo(w*.12, h*.93); rc.quadraticCurveTo(w/2, bt - h*.02, w*.88, h*.93); rc.stroke();
+}
+
+/* ---------- Main loop ---------- */
+let last = performance.now(), odo = 184327.4, odoTxt = '', cnt = '';
+const needleEl = () => document.getElementById('needle');
+let needle = null;
+function frame(now){
+  const dt = Math.min(.05, (now - last)/1000); last = now;
+  const t = getT(), d = getD();
+  if (S.mode === 'demo' && S.playing && t >= Demo.dur) next(true);
+  const frac = d > 0 ? Math.min(1, t/d) : 0;
+  const h = half(tape()), onB = S.idx >= h;
+  const p = ((onB ? S.idx - h : S.idx) + frac) / (onB ? tape().tracks.length - h : h);
+  const target = S.playing ? 40 : 0;
+  carV += (target - carV) * Math.min(1, dt*(S.playing ? .6 : 1.4));
+  if (Math.abs(carV - target) < .05) carV = target;
+  drawRoad(dt);
+  drawReels(dt, p);
+  const shown = carV > .5 ? carV + Math.sin(now/700)*1.2 + Math.sin(now/2300)*1.6 : 0;
+  if (needle) needle.setAttribute('transform', `rotate(${(-120 + shown*2).toFixed(2)} 100 100)`);
+  odo += carV*dt/3600;
+  const ot = odo.toLocaleString('en-IN', { minimumFractionDigits:1, maximumFractionDigits:1 });
+  if (ot !== odoTxt){ odoTxt = ot; $('odo').textContent = ot; }
+  const c = String(Math.floor(p*620) % 1000).padStart(3, '0');
+  if (c !== cnt){ cnt = c; $('lcdCount').textContent = c; }
+  requestAnimationFrame(frame);
+}
+
+restore();
+buildBox();
+buildSpeedo();
+needle = needleEl();
+buildTicks();
+setVol(S.vol);
+render();
+loadYT();
+requestAnimationFrame(frame);
+})();
+</script>
+
+</body>
+</html>
