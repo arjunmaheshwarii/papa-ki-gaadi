@@ -123,6 +123,11 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
 .fuel .bar{width:64px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--maruti) 0 12%,#3a332b 12%)}
 .stereo{background:linear-gradient(180deg,#24211d,#12100e);border:2px solid var(--chrome-lo);border-radius:12px;padding:10px 14px 14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);min-width:0}
 .brand{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--chrome-lo)}
+.brand-spec{margin-right:auto}
+.clock{display:inline-flex;align-items:baseline;gap:1px;font-family:var(--f-lcd);font-size:1.2rem;line-height:1;letter-spacing:.02em;text-transform:none;color:var(--amber);background:#170d02;border:1px solid #3d2b10;border-radius:4px;padding:3px 7px 2px;text-shadow:0 0 6px rgba(255,179,64,.55);font-variant-numeric:tabular-nums}
+.clock i{font-style:normal;animation:colon 2s steps(1) infinite}
+.clock small{font-size:.72rem;margin-left:4px;opacity:.75;letter-spacing:.06em}
+@keyframes colon{50%{opacity:.18}}
 .brand b{font-family:var(--f-display);font-weight:400;letter-spacing:.03em;font-size:1rem;text-transform:none;color:var(--chrome)}
 
 .slot{background:#070605;border-radius:8px;padding:8px;box-shadow:inset 0 3px 10px rgba(0,0,0,.8);perspective:600px;min-width:0}
@@ -228,6 +233,8 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
   .ign-tx{align-self:end;white-space:nowrap}
   .ign-sub{align-self:start;max-width:25ch}
   .stereo{grid-template-columns:minmax(0,1fr)}
+  .brand-spec{display:none}
+  .brand{flex-wrap:nowrap;justify-content:space-between}
   .dash{padding:30px 14px 16px}
   .dash-in{gap:16px}
   .speedo{max-width:160px}
@@ -265,7 +272,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
   .vent.r{left:calc(100% - (100% - 1120px) / 4)}
 }
 @media (prefers-reduced-motion:reduce){
-  .charm,.pencil.on,.cassette.flipping,.ign-dial,.live i{animation:none}
+  .charm,.pencil.on,.cassette.flipping,.ign-dial,.live i,.clock i{animation:none}
   .marquee span{animation:none;padding-left:0}
 }
 </style>
@@ -316,7 +323,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
     </div>
 
     <div class="stereo">
-      <div class="brand"><b>Sangeet Deluxe</b><span>Stereo Cassette · 2×7W</span></div>
+      <div class="brand"><b>Sangeet Deluxe</b><span class="brand-spec">Stereo Cassette · 2×7W</span><span class="clock" id="clock" role="timer" aria-label="Current time"><span id="clkH">12</span><i aria-hidden="true">:</i><span id="clkM">00</span><small id="clkAP">AM</small></span></div>
       <div class="slot">
         <div class="cassette" id="cassette">
           <div class="label">
@@ -852,6 +859,18 @@ document.addEventListener('keydown', e => {
   if (e.code === 'Space' && !e.target.closest('button,[role=slider],a,input,textarea')){ e.preventDefault(); toggle(); }
 });
 
+/* ---------- Dashboard clock (visitor's local time) ---------- */
+function tickClock(){
+  const d = new Date();
+  let h = d.getHours(); const m = d.getMinutes(), ap = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  const mm = String(m).padStart(2, '0');
+  if ($('clkM').textContent !== mm || $('clkH').textContent !== String(h)){
+    $('clkH').textContent = h; $('clkM').textContent = mm; $('clkAP').textContent = ap;
+    $('clock').setAttribute('aria-label', `Current time ${h}:${mm} ${ap}`);
+  }
+}
+
 /* ---------- Live listeners ---------- */
 // Pings /api/live (a Vercel function) every 30s. Shows "N listening now" = people with music playing in the last 90s.
 // Hidden when the counter backend isn't set up (or in previews).
@@ -1160,6 +1179,9 @@ needle = needleEl();
 buildTicks();
 setVol(S.vol);
 render();
+tickClock();
+setInterval(tickClock, 5000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) tickClock(); });
 loadYT();
 Live.start();
 requestAnimationFrame(frame);
