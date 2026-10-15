@@ -329,7 +329,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
           <div class="label">
             <div class="label-title" id="labelTitle">Kishore · Side A</div>
             <div class="label-side" id="labelSide">A</div>
-            <div class="label-note">Long drive · 1994</div>
+            <div class="label-note" id="labelNote">Long drive · 1994</div>
           </div>
           <div class="window"><canvas id="reels" aria-hidden="true"></canvas></div>
           <div class="cbottom"></div>
@@ -746,6 +746,7 @@ function render(){
   const tp = tape(), t = cur(), key = sideOf(S.tape, S.idx) ? 'B' : 'A';
   buildJ();
   $('labelTitle').textContent = `${tp.short} · Side ${key}`;
+  $('labelNote').textContent = `Long drive · ${Math.max(...tp.tracks.map(x => x.y))}`;
   $('labelSide').textContent = key;
   $('cassette').style.setProperty('--tape', tp.color);
   $('lcdSide').textContent = `T${S.tape+1} SIDE ${key}`;
