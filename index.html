@@ -48,9 +48,41 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
 .car{max-width:1060px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
 
 /* header */
-.top{margin-bottom:18px}
+.top{margin-bottom:18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
 .top h1{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.05;color:var(--paper);letter-spacing:.01em;text-wrap:balance}
 .top h1 small{display:block;font-family:var(--f-body);font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.chai{appearance:none;cursor:pointer;font:inherit;font-size:.85rem;font-weight:600;line-height:1;color:var(--paper);background:transparent;border:1px solid #5a4a3a;border-radius:999px;padding:9px 15px 9px 12px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;margin-top:6px;transition:border-color .2s,color .2s}
+.chai svg{width:17px;height:17px;flex:none}
+.chai:hover{border-color:var(--amber);color:var(--amber)}
+.chai:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* chai card */
+.tip{padding:0;border:0;background:transparent;max-width:calc(100vw - 32px);width:380px;color:var(--paper-ink)}
+.tip::backdrop{background:rgba(8,6,4,.72);backdrop-filter:blur(3px)}
+.tip-card{position:relative;margin:0;background:linear-gradient(var(--amber),var(--amber)) 0 0/100% 6px no-repeat,var(--paper);border-radius:10px;padding:26px 22px 20px;display:grid;gap:14px;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.tip-card h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:1.7rem;line-height:1.1;color:var(--paper-ink)}
+.tip-card .eyebrow{margin:0 0 -8px;color:var(--paper-muted)}
+.tip-sub{margin:0;font-size:.95rem;line-height:1.45;color:#4a3a2a}
+.tip-x{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:var(--paper-muted);font-size:1.4rem;line-height:1;cursor:pointer}
+.tip-x:hover{background:rgba(0,0,0,.06);color:var(--paper-ink)}
+.amts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.amt{appearance:none;cursor:pointer;font:inherit;font-weight:700;font-size:.98rem;padding:10px 0;border-radius:8px;border:1.5px solid #cbb994;background:#f7efdc;color:var(--paper-ink);font-variant-numeric:tabular-nums}
+.amt[aria-checked="true"]{border-color:var(--paper-ink);background:var(--paper-ink);color:var(--paper)}
+.upi-pay{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:1rem;padding:13px 16px;border-radius:8px;background:var(--maruti);color:#fff7ea}
+.upi-pay:active{transform:translateY(1px)}
+.qr-wrap{display:grid;justify-items:center;gap:6px}
+.qr{width:180px;max-width:100%;aspect-ratio:1;background:#fff;border-radius:8px;padding:6px;display:grid;place-items:center;color:var(--paper-muted);font-size:.8rem}
+.qr svg{width:100%;height:auto;display:block}
+.qr-wrap p{margin:0;font-size:.82rem;color:var(--paper-muted)}
+.upi-id{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px dashed #cbb994;border-radius:8px;font-size:.85rem;min-width:0}
+.upi-id span{color:var(--paper-muted);flex:none}
+.upi-id code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--f-lcd);font-size:1.15rem;color:var(--paper-ink)}
+.upi-id button{appearance:none;cursor:pointer;font:inherit;font-size:.78rem;font-weight:700;padding:6px 10px;border-radius:6px;border:0;background:var(--paper-ink);color:var(--paper);flex:none}
+.tip-fine{margin:0;font-size:.78rem;line-height:1.4;color:var(--paper-muted)}
+.amt:focus-visible,.upi-pay:focus-visible,.upi-id button:focus-visible,.tip-x:focus-visible{outline:2px solid var(--maruti);outline-offset:2px}
+@media (pointer:fine){.tip .upi-pay{display:none}}
+@media (pointer:coarse){.tip .qr-wrap{display:none}}
+
 /* windshield */
 .windshield{position:relative;aspect-ratio:16/7;max-width:100%;background:#0a0c1a;clip-path:polygon(4% 0,96% 0,100% 100%,0 100%)}
 .windshield canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
@@ -204,6 +236,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
 <main class="car" id="car">
   <header class="top">
     <h1>Papa Ki Gaadi<small>Old songs for a long drive</small></h1>
+    <button class="chai" id="chaiBtn" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 3.5c-.8 1 .8 1.8 0 3M12 3.5c-.8 1 .8 1.8 0 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Buy me a chai</button>
   </header>
 
   <section class="windshield" aria-label="Night drive">
@@ -300,12 +333,37 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
     <span>Made by Arjun</span>
     <span>Songs stream from YouTube and belong to their owners.</span>
   </footer>
+  <dialog class="tip" id="tip" aria-labelledby="tipTitle">
+    <form method="dialog" class="tip-card">
+      <button class="tip-x" value="close" aria-label="Close">×</button>
+      <p class="eyebrow">Support the drive</p>
+      <h2 id="tipTitle">Buy me a chai</h2>
+      <p class="tip-sub">Papa Ki Gaadi is free and has no ads. If it took you somewhere nice, a small chai helps keep it running.</p>
+      <div class="amts" role="radiogroup" aria-label="Amount">
+        <button type="button" class="amt" role="radio" aria-checked="false" data-a="20">₹20</button>
+        <button type="button" class="amt" role="radio" aria-checked="true" data-a="50">₹50</button>
+        <button type="button" class="amt" role="radio" aria-checked="false" data-a="100">₹100</button>
+        <button type="button" class="amt" role="radio" aria-checked="false" data-a="200">₹200</button>
+      </div>
+      <a class="upi-pay" id="upiPay" href="#">Pay ₹50 with a UPI app</a>
+      <div class="qr-wrap"><div class="qr" id="qr">Loading QR…</div><p>Scan with any UPI app to pay <b id="qrAmt">₹50</b></p></div>
+      <div class="upi-id"><span>UPI ID</span><code id="upiId"></code><button type="button" id="copyUpi">Copy</button></div>
+      <p class="tip-fine">Works with GPay, PhonePe, Paytm and BHIM. The payment goes straight to <span id="payeeName"></span>.</p>
+    </form>
+  </dialog>
   <div class="yt-hidden" aria-hidden="true"><div id="yt"></div></div>
 </main>
 
 <script>
 (() => {
 const $ = id => document.getElementById(id);
+
+/* ---------- Support (UPI) — fill these in ---------- */
+const SUPPORT = {
+  upi: 'YOUR-UPI-ID@bank',          // e.g. arjun@okaxis. The chai button stays hidden until this is set.
+  name: 'Arjun',                    // shown in the UPI app as the payee
+  note: 'Chai for Papa Ki Gaadi'    // payment note
+};
 
 const TAPES = [
   { name:"Kishore, on the Road", short:"Kishore", color:'#b8322a', tracks:[
@@ -609,7 +667,7 @@ function onStateChange(e){
 function onError(){
   S.errors++;
   if (S.errors >= total){ goDemo(); return; }
-  next(true);
+  next(S.started);
 }
 function goDemo(){
   if (S.mode === 'demo') return;
@@ -714,8 +772,50 @@ $('ignition').addEventListener('click', e => { e.stopPropagation(); play(); });
 document.querySelector('.windshield').addEventListener('click', () => toggle());
 $('kPencil').addEventListener('click', pencil);
 document.addEventListener('keydown', e => {
+  if ($('tip').open) return;
   if (e.code === 'Space' && !e.target.closest('button,[role=slider],a,input,textarea')){ e.preventDefault(); toggle(); }
 });
+
+/* ---------- Buy me a chai ---------- */
+function setupChai(){
+  const ok = SUPPORT.upi && /^[\w.\-]{2,}@[a-zA-Z]{2,}$/.test(SUPPORT.upi) && !/YOUR-UPI-ID/.test(SUPPORT.upi);
+  if (!ok) return;
+  const btn = $('chaiBtn'), dlg = $('tip');
+  let amt = 50;
+  $('upiId').textContent = SUPPORT.upi;
+  $('payeeName').textContent = SUPPORT.name;
+  const uri = () => `upi://pay?pa=${encodeURIComponent(SUPPORT.upi)}&pn=${encodeURIComponent(SUPPORT.name)}&am=${amt}.00&cu=INR&tn=${encodeURIComponent(SUPPORT.note)}`;
+  let qrLib = null;
+  const loadQR = () => qrLib || (qrLib = new Promise((res, rej) => {
+    if (window.qrcode) return res();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+    s.onload = res; s.onerror = rej; document.head.appendChild(s);
+  }));
+  const update = () => {
+    $('upiPay').href = uri();
+    $('upiPay').textContent = `Pay ₹${amt} with a UPI app`;
+    $('qrAmt').textContent = `₹${amt}`;
+    dlg.querySelectorAll('.amt').forEach(b => b.setAttribute('aria-checked', +b.dataset.a === amt ? 'true' : 'false'));
+    loadQR().then(() => {
+      const q = qrcode(0, 'M'); q.addData(uri()); q.make();
+      $('qr').innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true, alt: 'UPI QR code for ₹' + amt });
+    }).catch(() => { $('qr').textContent = 'QR unavailable. Use the UPI ID below.'; });
+  };
+  dlg.querySelector('.amts').addEventListener('click', e => {
+    const b = e.target.closest('.amt'); if (!b) return;
+    amt = +b.dataset.a; update();
+  });
+  $('copyUpi').addEventListener('click', async () => {
+    const c = $('copyUpi');
+    try { await navigator.clipboard.writeText(SUPPORT.upi); c.textContent = 'Copied'; }
+    catch(e){ const r = document.createRange(); r.selectNodeContents($('upiId')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); c.textContent = 'Selected'; }
+    setTimeout(() => { c.textContent = 'Copy'; }, 1800);
+  });
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+  btn.addEventListener('click', () => { update(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); });
+  btn.hidden = false;
+}
 
 /* ---------- Volume knob ---------- */
 const knob = $('knob');
@@ -945,6 +1045,7 @@ function frame(now){
 }
 
 restore();
+setupChai();
 buildBox();
 buildSpeedo();
 needle = needleEl();
