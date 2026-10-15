@@ -47,7 +47,8 @@
 *{box-sizing:border-box}
 html,body{background:var(--night)}
 body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
-.car{max-width:1060px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.car{padding-block:20px 40px}
+.cockpit,.below{max-width:1060px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
 /* header */
 .top{margin-bottom:18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
@@ -106,7 +107,9 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
 .car.is-playing .charm{--sw:10deg;animation-duration:1.5s}
 
 /* dashboard */
-.dash{position:relative;margin-top:-26px;background:linear-gradient(180deg,var(--vinyl-hi),var(--vinyl) 40%);border-radius:50% 50% 20px 20px / 26px 26px 20px 20px;padding:34px 22px 22px;display:grid;grid-template-columns:190px minmax(0,1fr) 140px;gap:22px;align-items:center;box-shadow:inset 0 2px 0 rgba(255,255,255,.06),0 20px 40px rgba(0,0,0,.4)}
+.dash{position:relative;margin-top:-26px;background:linear-gradient(180deg,var(--vinyl-hi),var(--vinyl) 40%);border-radius:50% 50% 20px 20px / 26px 26px 20px 20px;padding:34px 22px 22px;box-shadow:inset 0 2px 0 rgba(255,255,255,.06),0 20px 40px rgba(0,0,0,.4)}
+.dash-in{display:grid;grid-template-columns:190px minmax(0,1fr) 140px;gap:22px;align-items:center}
+.vent,.glove-hint{display:none}
 .gauges{display:grid;gap:10px;justify-items:center}
 .speedo{width:100%;max-width:190px;height:auto;display:block}
 .odo{font-family:var(--f-lcd);font-size:1.35rem;line-height:1.2;background:#0b0a09;border:1px solid #3a332b;border-radius:4px;padding:0 8px;color:#efe9de;letter-spacing:.06em;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -207,7 +210,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
 .foot{margin-top:30px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;color:var(--muted);font-size:.86rem}
 
 @media (max-width:860px){
-  .dash{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"stereo stereo" "gauges knob"}
+  .dash-in{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"stereo stereo" "gauges knob"}
   .stereo{grid-area:stereo}
   .gauges{grid-area:gauges}
   .knob-wrap{grid-area:knob}
@@ -220,11 +223,41 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
   .ign-tx{align-self:end;white-space:nowrap}
   .ign-sub{align-self:start;max-width:25ch}
   .stereo{grid-template-columns:minmax(0,1fr)}
-  .dash{padding:30px 14px 16px;gap:16px}
+  .dash{padding:30px 14px 16px}
+  .dash-in{gap:16px}
   .speedo{max-width:160px}
   .jcard{grid-template-columns:minmax(0,1fr)}
   .knob-ring{width:100px;height:100px}
   .knob{width:72px;height:72px}
+}
+/* Big screens: the cockpit fills the whole window, edge to edge */
+@media (min-width:900px) and (min-height:560px){
+  .car{padding-block:0 40px}
+  .cockpit{max-width:none;padding:0;position:relative;height:100vh;height:100svh;min-height:560px;max-height:1200px;display:flex;flex-direction:column}
+  .top{position:absolute;top:0;left:0;right:0;z-index:3;margin:0;padding:clamp(18px,3.2vh,34px) max(56px,8.5vw) 0;pointer-events:none}
+  .top>*{pointer-events:auto}
+  .top h1{text-shadow:0 2px 18px rgba(0,0,0,.6)}
+  .windshield{flex:1;min-height:0;aspect-ratio:auto;clip-path:none;max-width:none}
+  .windshield::before,.windshield::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none}
+  .windshield::before{background:linear-gradient(90deg,#050404,#15100c 70%,#1f1813);clip-path:polygon(0 0,6.5% 0,2% 100%,0 100%)}
+  .windshield::after{background:linear-gradient(270deg,#050404,#15100c 70%,#1f1813);clip-path:polygon(93.5% 0,100% 0,100% 100%,98% 100%)}
+  .mirror,.ignition{z-index:2}
+  .ignition{top:60%}
+  .ign-dial{width:clamp(76px,13vh,128px)}
+  .ign-tx{font-size:clamp(1.25rem,3.4vh,1.85rem)}
+  .speedo{max-width:min(190px,25vh)}
+  .slot{max-width:min(100%,54vh);justify-self:center;width:100%}
+  .dash{margin-top:-34px;border-radius:50% 50% 0 0 / 34px 34px 0 0;padding:38px 0 18px}
+  .dash-in{max-width:1120px;margin:0 auto;padding-inline:24px;gap:28px}
+  .glove-hint{display:block;width:max-content;margin:8px auto 0;color:var(--muted);font-size:.72rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:6px 10px;border-radius:999px}
+  .glove-hint:hover{color:var(--amber)}
+  .glove-hint:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .below{padding-top:8px}
+}
+@media (min-width:1500px) and (min-height:560px){
+  .vent{display:block;position:absolute;top:50%;translate:-50% -50%;width:min(150px,7vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#2a231d 0 18%,transparent 19%),repeating-linear-gradient(0deg,#0f0c0a 0 6px,#2b241e 6px 9px);border:4px solid var(--chrome-lo);box-shadow:inset 0 0 0 3px #15110e,0 6px 14px rgba(0,0,0,.5)}
+  .vent.l{left:calc((100% - 1120px) / 4)}
+  .vent.r{left:calc(100% - (100% - 1120px) / 4)}
 }
 @media (prefers-reduced-motion:reduce){
   .charm,.pencil.on,.cassette.flipping,.ign-dial{animation:none}
@@ -236,6 +269,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
 </head>
 <body>
 <main class="car" id="car">
+  <div class="cockpit">
   <header class="top">
     <h1>Papa Ki Gaadi<small>Old songs for a long drive</small></h1>
     <button class="chai" id="chaiBtn" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 10.5h1.5a2.5 2.5 0 0 1 0 5H16" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 3.5c-.8 1 .8 1.8 0 3M12 3.5c-.8 1 .8 1.8 0 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Buy me a chai</button>
@@ -264,6 +298,9 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
   </section>
 
   <section class="dash" aria-label="Dashboard">
+    <div class="vent l" aria-hidden="true"></div>
+    <div class="vent r" aria-hidden="true"></div>
+    <div class="dash-in">
     <div class="gauges">
       <svg class="speedo" id="speedo" viewBox="0 0 200 150" role="img" aria-label="Speedometer"></svg>
       <div class="odo"><span id="odo">1,84,327.4</span> <span class="u">km</span></div>
@@ -311,9 +348,13 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
       </div>
       <div class="knob-label">Volume <b id="volOut">7</b></div>
     </div>
+    </div>
+    <a class="glove-hint" href="#glovebox">The glovebox ↓</a>
   </section>
+  </div>
 
-  <section class="glove">
+  <div class="below">
+  <section class="glove" id="glovebox">
     <div class="now" aria-live="polite">
       <p class="eyebrow">Now playing</p>
       <p class="now-t" id="nowT">Zindagi Ek Safar Hai Suhana</p>
@@ -335,6 +376,7 @@ body{margin:0;color:var(--fg);font-family:var(--f-body);font-size:16px;line-heig
     <span>Made by Arjun</span>
     <span>Songs stream from YouTube and belong to their owners.</span>
   </footer>
+  </div>
   <dialog class="tip" id="tip" aria-labelledby="tipTitle">
     <form method="dialog" class="tip-card">
       <button class="tip-x" value="close" aria-label="Close">×</button>
@@ -946,7 +988,7 @@ function glow(x, y, r, color){
 }
 function drawRoad(dt){
   const [w, h] = fit(rd);
-  const hz = h*.5, G = h*1.08 - hz, X = w*.72;
+  const hz = h*.5, G = h*1.08 - hz, X = Math.min(w*.72, h*1.7);
   const proj = (xw, z, yw = 0) => [w/2 + xw*X/z, hz + (1 - yw)*G/z];
   const speed = carV*.4*(reduce ? 0 : 1);
   dist += speed*dt;
